@@ -40,6 +40,7 @@ namespace :app do
       FileUtils.cp_r( File.join(MARLEY_ROOT, 'app', 'test', 'fixtures', '001-test-article-one'), Marley::Application::DATA_DIRECTORY )
     end
     task :create_sample_comment do
+      require 'vendor/akismetor'
       require 'vendor/antispammer'
       puts "* Creating sample comment"
       Marley::Comment.create( :author  => 'John Doe',
