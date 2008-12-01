@@ -4,8 +4,6 @@ require File.join(File.dirname(__FILE__), 'post_builder')
 
 module Marley
 
-  # = Articles
-  # Data source is Marley::Configuration::DATA_DIRECTORY (set in <tt>config.yml</tt>)
   class Post
     
     attr_reader :id, :title, :perex, :body, :published_on, :updated_on, :published, :categories, :format
