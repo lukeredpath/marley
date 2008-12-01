@@ -1,4 +1,6 @@
 require 'date'
+require 'rdiscount'
+require 'redcloth'
 require File.join(File.dirname(__FILE__), 'repository')
 require File.join(File.dirname(__FILE__), 'post_builder')
 
@@ -42,7 +44,7 @@ module Marley
     end
     
     def body_html
-      @body_html ||= RDiscount::new(self.body).to_html
+      @body_html ||= parsers[format || :markdown].call(self.body).to_html
     end
             
     private
@@ -64,7 +66,14 @@ module Marley
       if file = repository.article_with_id(id)
         PostBuilder.new(File.dirname(file)).build
       end
-    end  
+    end
+    
+    def parsers
+      @parsers ||= {
+        :textile  => proc{ |body| RedCloth.new(body) },
+        :markdown => proc{ |body| RDiscount.new(body) }
+      }
+    end
   end
 
 end
