@@ -96,7 +96,7 @@ class MarleyTest < Test::Unit::TestCase
 
   def test_articles_should_have_proper_published_on_dates
     get_it '/'
-    # p @response.body
+    #p @response.body
     assert @response.status == 200
     assert @response.body =~ Regexp.new(Regexp.escape("<small>23|12|2050 &mdash;</small>")),
                              "HTML should contain proper date for post one"

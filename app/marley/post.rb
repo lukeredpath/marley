@@ -1,5 +1,6 @@
 require 'date'
 require File.join(File.dirname(__FILE__), 'repository')
+require File.join(File.dirname(__FILE__), 'post_builder')
 
 module Marley
 
@@ -7,7 +8,7 @@ module Marley
   # Data source is Marley::Configuration::DATA_DIRECTORY (set in <tt>config.yml</tt>)
   class Post
     
-    attr_reader :id, :title, :perex, :body, :body_html, :meta, :published_on, :updated_on, :published, :comments
+    attr_reader :id, :title, :perex, :body, :published_on, :updated_on, :published, :categories, :format
     
     # comments are referenced via +has_many+ in Comment
     
@@ -31,13 +32,17 @@ module Marley
       alias :find :[] # For +belongs_to+ in Comment
 
     end
-    
-    def categories
-      self.meta['categories'] if self.meta and self.meta['categories']
-    end
 
     def permalink
       "/#{id}.html"
+    end
+    
+    def comments
+      @comments ||= Marley::Comment.find_all_by_post_id(self.id)
+    end
+    
+    def body_html
+      @body_html ||= RDiscount::new(self.body).to_html
     end
             
     private
@@ -49,9 +54,7 @@ module Marley
     def self.find_all(options={})
       options[:except] ||= ['body', 'body_html']
       posts = repository.all_articles.map do |file|
-        attributes = self.extract_post_info_from(file, options)
-        attributes.merge!( :comments => Marley::Comment.find_all_by_post_id(attributes[:id], :select => ['id']) )
-        new( attributes )
+        PostBuilder.new(File.dirname(file)).build
       end
       return posts.reverse
     end
@@ -59,9 +62,7 @@ module Marley
     def self.find_one(id, options={})
       options.merge!(:draft => true)
       if file = repository.article_with_id(id)
-        return new(extract_post_info_from(file, options).merge(
-          :comments => Marley::Comment.find_all_by_post_id(id)
-        ))
+        PostBuilder.new(File.dirname(file)).build
       end
     end
     
@@ -78,7 +79,7 @@ module Marley
       body          = file_content.sub( self.regexp[:title], '').sub( self.regexp[:perex], '').strip
       post          = Hash.new
 
-      post[:id]           = dirname.sub(self.regexp[:id], '\1').sub(/\.draft$/, '')
+      post[:id]           = dirname.sub(/^\d{0,4}-{0,1}(.*)$/, '\1').sub(/\.draft$/, '')
       post[:title], post[:published_on] = file_content.scan( self.regexp[:title_with_date] ).first
       post[:title]        = file_content.scan( self.regexp[:title] ).first.to_s.strip if post[:title].nil?
       post[:published_on] = DateTime.parse( post[:published_on] ) rescue File.mtime( File.dirname(file) )
