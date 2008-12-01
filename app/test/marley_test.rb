@@ -6,19 +6,15 @@ require 'sinatra/test/unit'
 # Require application file
 require File.join(File.dirname(__FILE__), *%w[.. marley])
 
-# Redefine data directory for tests
-module Marley
-  module Configuration
-    DATA_DIRECTORY = File.join(MARLEY_ROOT, 'app', 'test', 'fixtures')
-  end
-end
-
 TEST_DATABASE = File.join(FIXTURES_DIRECTORY, 'test.db')
 
 # Redefine database with comments for tests
 module Marley
   class Comment < ActiveRecord::Base
-    ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => TEST_DATABASE)
+    ActiveRecord::Base.establish_connection( 
+      :adapter => 'sqlite3', 
+      :database => TEST_DATABASE
+    )
   end
 end
 
@@ -40,6 +36,10 @@ class MarleyTest < Test::Unit::TestCase
 
   configure do
     set_options :views => Marley::Configuration.directory_for_theme(Marley::Configuration::DEFAULT_THEME)
+  end
+  
+  def setup
+    Marley::Post.data_directory = File.join(MARLEY_ROOT, 'app', 'test', 'fixtures')
   end
 
   def test_should_show_index_page

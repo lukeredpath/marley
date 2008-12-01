@@ -17,6 +17,8 @@ module Marley
     end
   
     class << self
+      
+      attr_writer :data_directory
 
       def all(options={})
         self.find_all options.merge(:draft => true)
@@ -30,6 +32,10 @@ module Marley
         self.find_one(id, options)
       end
       alias :find :[] # For +belongs_to+ in Comment
+      
+      def data_directory
+        @data_directory || Configuration::DATA_DIRECTORY
+      end
 
     end
 
@@ -48,7 +54,7 @@ module Marley
     private
     
     def self.repository
-      @repository ||= Repository.new(Configuration::DATA_DIRECTORY)
+      Repository.new(data_directory)
     end
     
     def self.find_all(options={})
