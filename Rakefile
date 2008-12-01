@@ -86,3 +86,25 @@ namespace :server do
   end
   
 end
+
+
+namespace :generate do
+  
+  task :post do
+    if article_name = ENV['name']
+      article_token = article_name.downcase.squeeze(' ').gsub(/\s/, '-')
+      article_index = Dir["#{Marley::Application::DATA_DIRECTORY}/*"].select { |node| 
+        File.directory?(node) 
+      }.map { |dir| dir.match(/[0-9]+/)[0] }.sort.last.succ rescue "001"
+      article_dir = "#{article_index}-#{article_token}"
+      FileUtils.mkdir(File.join(Marley::Application::DATA_DIRECTORY, article_dir))
+      File.open(File.join(Marley::Application::DATA_DIRECTORY, article_dir, "article.txt"), 'w') do |io|
+        io << "# #{article_name}\n"
+      end
+    else
+      puts "You must specify an article name using name='My article name.'"
+      exit 1
+    end
+  end
+  
+end
