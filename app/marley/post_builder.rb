@@ -5,8 +5,7 @@ module Marley
     end
     
     def build
-      post_data = {}
-      post_data.merge!({
+      return Post.new({
         :id           => article_id,
         :title        => meta_data[:title],
         :perex        => raw_perex,
@@ -17,7 +16,6 @@ module Marley
         :format       => meta_data[:format] || :markdown,
         :categories   => meta_data[:categories] || []
       })
-      return Post.new(post_data)
     end
     
     private
