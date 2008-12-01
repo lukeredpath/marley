@@ -1,4 +1,5 @@
 require 'date'
+require File.join(File.dirname(__FILE__), 'repository')
 
 module Marley
 
@@ -41,40 +42,27 @@ module Marley
             
     private
     
+    def self.repository
+      @repository ||= Repository.new(Configuration::DATA_DIRECTORY)
+    end
+    
     def self.find_all(options={})
       options[:except] ||= ['body', 'body_html']
-      posts = []
-      self.extract_posts_from_directory(options).each do |file|
+      posts = repository.all_articles.map do |file|
         attributes = self.extract_post_info_from(file, options)
         attributes.merge!( :comments => Marley::Comment.find_all_by_post_id(attributes[:id], :select => ['id']) )
-        posts << self.new( attributes )
+        new( attributes )
       end
       return posts.reverse
     end
     
     def self.find_one(id, options={})
-      directory = self.load_directories_with_posts(options).select { |dir| dir =~ Regexp.new("#{id}") }
-      options.merge!( {:draft => true} )
-      # FIXME : Refactor this mess!
-      return if directory.empty?
-      directory = directory.first
-      return unless directory or !File.exist?(directory)
-      file = Dir["#{directory}/*.txt"].first
-      self.new( self.extract_post_info_from(file, options).merge( :comments => Marley::Comment.find_all_by_post_id(id) ) )
-    end
-    
-    # Returns directories in data directory. Default is published only (no <tt>.draft</tt> in name)
-    def self.load_directories_with_posts(options={})
-      if options[:draft]
-        Dir[File.join(Configuration::DATA_DIRECTORY, '*')].select { |dir| File.directory?(dir)  }.sort
-      else
-        Dir[File.join(Configuration::DATA_DIRECTORY, '*')].select { |dir| File.directory?(dir) and not dir.include?('.draft')  }.sort
+      options.merge!(:draft => true)
+      if file = repository.article_with_id(id)
+        return new(extract_post_info_from(file, options).merge(
+          :comments => Marley::Comment.find_all_by_post_id(id)
+        ))
       end
-    end
-    
-    # Loads all directories in data directory and returns first <tt>.txt</tt> file in each one
-    def self.extract_posts_from_directory(options={})
-      self.load_directories_with_posts(options).collect { |dir| Dir["#{dir}/*.txt"].first }.compact
     end
     
     # Extracts post information from the directory name, file contents, modification time, etc

@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'activerecord'
 require 'rake'
+require 'rake/testtask'
 require 'ftools'
 
 MARLEY_ROOT = '.'
@@ -55,9 +56,12 @@ namespace :app do
   end
 
   desc "Run tests for the application"
-  task :test do
-    exec "cd app/test; ruby marley_test.rb"
+  Rake::TestTask.new(:test) do |t|
+    t.libs << 'app/marley'
+    t.pattern = 'app/test/**/*_test.rb'
+    t.verbose = true
   end
+  
   
 end
 

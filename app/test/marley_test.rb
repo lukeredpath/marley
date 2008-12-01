@@ -1,22 +1,24 @@
-require 'rubygems'
+require File.join(File.dirname(__FILE__), 'test_helper')
 require 'rack'
 require 'sinatra'
 require 'sinatra/test/unit'
 
 # Require application file
-require '../marley'
+require File.join(File.dirname(__FILE__), *%w[.. marley])
 
 # Redefine data directory for tests
 module Marley
   module Configuration
-    DATA_DIRECTORY = File.join(File.dirname(__FILE__), 'fixtures')
+    DATA_DIRECTORY = File.join(MARLEY_ROOT, 'app', 'test', 'fixtures')
   end
 end
+
+TEST_DATABASE = File.join(FIXTURES_DIRECTORY, 'test.db')
 
 # Redefine database with comments for tests
 module Marley
   class Comment < ActiveRecord::Base
-    ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => './fixtures/test.db' )
+    ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => TEST_DATABASE)
   end
 end
 
@@ -29,8 +31,8 @@ end
 
 
 # Setup fresh comments table
-File.delete('./fixtures/test.db') if File.exists?('./fixtures/test.db')
-ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => './fixtures/test.db')
+File.delete(TEST_DATABASE) if File.exists?(TEST_DATABASE)
+ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => TEST_DATABASE)
 load File.join(MARLEY_ROOT, 'config', 'db_create_comments.rb' )
 
 
