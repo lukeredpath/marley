@@ -64,52 +64,7 @@ module Marley
       if file = repository.article_with_id(id)
         PostBuilder.new(File.dirname(file)).build
       end
-    end
-    
-    # Extracts post information from the directory name, file contents, modification time, etc
-    # Returns hash which can be passed to <tt>Marley::Post.new()</tt>
-    # Extracted attributes can be configured with <tt>:except</tt> and <tt>:only</tt> options
-    def self.extract_post_info_from(file, options={})
-      raise ArgumentError, "#{file} is not a readable file" unless File.exist?(file) and File.readable?(file)
-      options[:except] ||= []
-      options[:only]   ||= Marley::Post.instance_methods # FIXME: Refaktorovat!!
-      dirname       = File.dirname(file).split('/').last
-      file_content  = File.read(file)
-      meta_content  = file_content.slice!( self.regexp[:meta] )
-      body          = file_content.sub( self.regexp[:title], '').sub( self.regexp[:perex], '').strip
-      post          = Hash.new
-
-      post[:id]           = dirname.sub(/^\d{0,4}-{0,1}(.*)$/, '\1').sub(/\.draft$/, '')
-      post[:title], post[:published_on] = file_content.scan( self.regexp[:title_with_date] ).first
-      post[:title]        = file_content.scan( self.regexp[:title] ).first.to_s.strip if post[:title].nil?
-      post[:published_on] = DateTime.parse( post[:published_on] ) rescue File.mtime( File.dirname(file) )
-
-      post[:perex]        = file_content.scan( self.regexp[:perex] ).first.to_s.strip unless options[:except].include? 'perex' or
-                                                                                      not options[:only].include? 'perex'
-      post[:body]         = body                                                      unless options[:except].include? 'body' or
-                                                                                      not options[:only].include? 'body'
-      post[:body_html]    = RDiscount::new( body ).to_html                            unless options[:except].include? 'body_html' or
-                                                                                      not options[:only].include? 'body_html'
-      post[:meta]         = ( meta_content ) ? YAML::load( meta_content.scan( self.regexp[:meta]).to_s ) : 
-                                               nil unless options[:except].include? 'meta' or not options[:only].include? 'meta'
-                                                                                      not options[:only].include? 'published_on'
-      post[:updated_on]   = File.mtime( file )                                        unless options[:except].include? 'updated_on' or
-                                                                                      not options[:only].include? 'updated_on'
-      post[:published]    = !dirname.match(/\.draft$/)                                unless options[:except].include? 'published' or
-                                                                                      not options[:only].include? 'published'
-      return post
-    end
-    
-    def self.regexp
-      { :id    => /^\d{0,4}-{0,1}(.*)$/,
-        :title => /^#\s*(.*)\s+$/,
-        :title_with_date => /^#\s*(.*)\s+\(([0-9\/]+)\)$/,
-        :published_on => /.*\s+\(([0-9\/]+)\)$/,
-        :perex => /^([^\#\n]+\n)$/, 
-        :meta  => /^\{\{\n(.*)\}\}\n$/mi # Multiline Regexp 
-      } 
-    end
-  
+    end  
   end
 
 end
