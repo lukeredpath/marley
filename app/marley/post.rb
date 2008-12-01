@@ -18,7 +18,7 @@ module Marley
   
     class << self
       
-      attr_writer :data_directory
+      attr_accessor :data_directory
 
       def all(options={})
         self.find_all options.merge(:draft => true)
@@ -33,10 +33,6 @@ module Marley
       end
       alias :find :[] # For +belongs_to+ in Comment
       
-      def data_directory
-        @data_directory || Configuration::DATA_DIRECTORY
-      end
-
     end
 
     def permalink

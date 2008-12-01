@@ -12,7 +12,6 @@ require File.join(File.dirname(__FILE__), '..', 'vendor', 'githubber')   # ... g
 # require 'sinatra'
 
 MARLEY_ROOT = File.join(File.dirname(__FILE__), '..') unless defined?(MARLEY_ROOT)
-
 CONFIG = YAML.load_file( File.join(MARLEY_ROOT, 'config', 'config.yml') ) unless defined?(CONFIG)
 
 # -----------------------------------------------------------------------------
@@ -28,6 +27,8 @@ end
 configure do
   theme_directory = Marley::Configuration.directory_for_theme(CONFIG['theme'] || Marley::Configuration::DEFAULT_THEME)
   set_options :views => theme_directory if File.directory?(theme_directory)
+
+  Marley::Post.data_directory = Marley::Configuration::DATA_DIRECTORY
 end
 
 configure :production do
