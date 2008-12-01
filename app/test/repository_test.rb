@@ -10,8 +10,8 @@ class RepositoryTest < Test::Unit::TestCase
 
     should "should return all non-draft articles" do
       expected = [
-        File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'test-article.txt'),
-        File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'test-article.txt')
+        File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'article.txt'),
+        File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'article.txt')
       ]
       assert_equal expected, @repository.all_articles
     end
@@ -24,8 +24,8 @@ class RepositoryTest < Test::Unit::TestCase
         FileUtils.touch(File.join(draft_directory, 'article.txt'))
       
         expected = [
-          File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'test-article.txt'),
-          File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'test-article.txt')
+          File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'article.txt'),
+          File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'article.txt')
         ]
         assert_equal expected, @repository.all_articles
       ensure
@@ -41,8 +41,8 @@ class RepositoryTest < Test::Unit::TestCase
         FileUtils.touch(File.join(draft_directory, 'article.txt'))
       
         expected = [
-          File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'test-article.txt'),
-          File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'test-article.txt'),
+          File.join(FIXTURES_DIRECTORY, '001-test-article-one', 'article.txt'),
+          File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'article.txt'),
           File.join(FIXTURES_DIRECTORY, '003-test-article-three.draft', 'article.txt')
         ]
         assert_equal expected, @repository.all_articles(:draft => true)
@@ -52,7 +52,7 @@ class RepositoryTest < Test::Unit::TestCase
     end
     
     should "return a single article by ID" do
-      expected = File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'test-article.txt')
+      expected = File.join(FIXTURES_DIRECTORY, '002-test-article-two', 'article.txt')
       assert_equal expected, @repository.article_with_id('test-article-two')
     end
   end
