@@ -3,6 +3,10 @@ body {
 	padding: 0 320px 50px 50px;
 }
 
+.nodisplay {
+	display: none;
+}
+
 /** typography **/
 
 h1 {
@@ -23,6 +27,7 @@ h2 {
 	line-height: 11px;
 	border-left: 50px solid #FF0099;
 	position: relative;
+	margin: 30px 0 20px;
 	left: -60px;
 }
 
@@ -78,8 +83,85 @@ p img {
 	width: 100%;
 }
 
-/** key sections **/
+/** posts **/
 
 div.post {
 	margin-bottom: 30px;
+}
+
+/** comments **/
+
+div.comment {
+	background: #eee;
+	padding: 15px 50px;
+	margin: 0 0 20px;
+	position: relative;
+	font-size: 18px;
+}
+
+div.comment .number {
+	position: absolute;
+	top: 0; left: 0;
+	background: #ccc;
+	display: block;
+	padding: 10px 0;
+	width: 36px;
+	text-align: center;
+	color: #444;
+	font-size: 28px;
+}
+
+div.comment h3 {
+	font-size: 13px;
+	text-transform: uppercase;
+}
+
+#comment_added_thanks {
+	background: #FFE992;
+	padding: 10px 20px;
+	margin: 0 0 20px;
+}
+
+#comment_form {
+	padding: 10px;
+}
+
+#comment_form .field {
+	clear: both;
+	margin: 0 0 15px;
+}
+
+#comment_form .field span,
+#comment_form .error {
+	font-size: 11px;
+	text-transform: uppercase;
+	font-family: Helvetica, Arial, sans-serif;
+	color: #666;
+}
+
+#comment_form .field label {
+	display: block;
+	font-size: 12px;
+	text-transform: uppercase;
+	font-family: Helvetica, Arial, sans-serif;
+}
+
+#comment_form .field input {
+	font-size: 13px;
+}
+
+#comment_form .field textarea {
+	width: 450px;
+}
+
+#comment_form .field .hint {
+	display: block;
+}
+
+#comment_form .error {
+	position: relative;
+	top: -6px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	color: red;
 }
