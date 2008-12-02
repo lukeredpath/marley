@@ -14,15 +14,17 @@
   <% end %>
 
 
-  <link rel="stylesheet" href="/stylesheets/master.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="/theme/stylesheets/master.css" type="text/css" media="screen" />
   <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
 	
 </head>
 
 <body>
+  
+  <h1><%= CONFIG['blog']['title'] %></h1>
 
   <div class="container">
-  <%= yield %>
+    <%= yield %>
   </div><!-- /container -->
 
   <% if CONFIG['ga_code'] && Sinatra.env == :production %>

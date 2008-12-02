@@ -1,23 +1,17 @@
-<h2><a href="/"><%= CONFIG['blog']['title'] %></a></h2>
-
 <div id="article">
 
   <div class="post">
-  <h1>
-    <%=h @post.title %>
-    <span class="meta">
-      <%= human_date @post.published_on %> 
-      <a href="#comments"><%= @post.comments.size %>&nbsp;comments</a>&nbsp;<a href="http://<%= hostname %>/<%= @post.id %>/feed" class="image">[Feed]</a>
-    </span>
-  </h1>
-  
-  <div class="body">
+    <h2>
+      <span class="published_on"><%= @post.published_on.strftime("%d %B %Y") %></span><br />
+      <span class="title"><%=h @post.title %></span>
+    </h2>
+
     <%= @post.body_html %>
-  </div><!-- /body -->
+  </div>
   
   <div id="comments">
     
-    <h3>Comments</h3>
+    <h2>Comments on this article</h2>
     
     <% @post.comments.each_with_index do |comment, index| %>
     <% if params[:thank_you] && comment == @post.comments.last %>

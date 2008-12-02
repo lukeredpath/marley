@@ -1,12 +1,17 @@
-<h1><%= CONFIG['blog']['title'] %></h1>
-
-<ul class="posts">
-<% @posts.each do |post| %>
-<li>
-  <small><%= human_date post.published_on %> &mdash;</small>
-  <strong><a href="/<%= post.id %>.html"><%= post.title %></a></strong>
-  <span class="perex"><%= post.perex %> (<%= post.comments.size %> comments)</span>
-</li>
+<% @posts.first(10).each do |post| %>
+  <div class="post" id="<%= post.id %>">
+    <h2>
+      <span class="published_on"><%= post.published_on.strftime("%d %B %Y") %></span><br />
+      <span class="title"><%=h post.title %></span>
+    </h2>
+    <%= post.body_html %>
+  
+    <div class="comments">
+    <% if post.comment_count > 0 %>
+      <a href="<%= permalink(post) %>"><%= post.comment_count %> comment(s) on this post</a>
+    <% else %>
+      <a href="<%= permalink(post) %>">Comment on this post</a></p>
+    <% end %>
+    </div>
+  </div>
 <% end %>
-</ul>
-
