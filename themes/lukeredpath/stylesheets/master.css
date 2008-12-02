@@ -120,7 +120,7 @@ a:hover {
 	color: #FF0099;
 }
 
-p img {
+#container p img {
 	width: 100%;
 }
 
@@ -233,4 +233,12 @@ div.comment h3 {
 
 body #github-badge .repos li {
 	font-size: 12px;
+}
+
+/** about me **/
+
+#avatar {
+	float: right;
+	margin-top: -40px;
+	height: 160px;
 }
