@@ -70,6 +70,10 @@ helpers do
   def error
     File.read( File.join( File.dirname(__FILE__), 'public', '500.html') )
   end
+  
+  def permalink(post)
+    "/#{post.id}.html"
+  end
 
 end
 
