@@ -24,10 +24,12 @@ end
 
 # -----------------------------------------------------------------------------
 
-configure do
-  theme_directory = Marley::Configuration.directory_for_theme(CONFIG['theme'] || Marley::Configuration::DEFAULT_THEME)
-  set_options :views => theme_directory if File.directory?(theme_directory)
+unless defined?(THEME_DIRECTORY)
+  THEME_DIRECTORY = Marley::Configuration.directory_for_theme(CONFIG['theme'] || Marley::Configuration::DEFAULT_THEME)
+end
 
+configure do
+  set_options :views => THEME_DIRECTORY if File.directory?(THEME_DIRECTORY)
   Marley::Post.data_directory = Marley::Configuration::DATA_DIRECTORY
 end
 
@@ -127,6 +129,15 @@ get '/:post_id/feed' do
   builder :post
 end
 
+get '/theme/stylesheets/:stylesheet.css' do
+  stylesheet = File.join(THEME_DIRECTORY, 'stylesheets', params[:stylesheet] + '.css')
+  p 'here'
+  if File.exist?(stylesheet)
+    File.read(stylesheet)
+  else
+    throw :halt, [404, not_found]
+  end
+end
 
 post '/sync' do
   throw :halt, 404 and return if not CONFIG['github_token'] or CONFIG['github_token'].nil?
