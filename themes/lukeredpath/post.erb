@@ -21,8 +21,8 @@
     <div class="comment<%= ' spam' if comment.spam? %>" id="comment_<%= comment.id %>">
       <div class="number"><span class="nodisplay"># </span><%= index.succ %></div>
       <h3>
-        <%= comment.url ? "<a href=\"#{h(comment.url)}\">#{h(comment.author)}</a>" : h(comment.author) %>
-        wrote on <%= human_date(comment.created_at) %>:
+        <%= comment.url.blank? ? h(comment.author) : "<a href=\"#{h(comment.url)}\">#{h(comment.author)}</a>" %>
+        wrote on <%= comment.created_at.strftime("%d %B %Y") %>
       </h3>
       
       <div class="message">
