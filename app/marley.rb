@@ -134,10 +134,9 @@ get '/:post_id/feed' do
 end
 
 get '/theme/stylesheets/:stylesheet.css' do
-  stylesheet = File.join(THEME_DIRECTORY, 'stylesheets', params[:stylesheet] + '.css')
-  p 'here'
-  if File.exist?(stylesheet)
-    File.read(stylesheet)
+  stylesheet_path = File.join(THEME_DIRECTORY, 'stylesheets', params[:stylesheet] + '.css')
+  if File.exist?(stylesheet_path)
+    send_file stylesheet_path, :type => 'text/css', :disposition => 'inline', :stream => false
   else
     throw :halt, [404, not_found]
   end
