@@ -8,9 +8,9 @@
   
     <div class="comments">
     <% if post.comment_count > 0 %>
-      <a href="<%= permalink(post) %>"><%= post.comment_count %> comment(s) on this post</a>
+      <a href="<%= permalink(post) %>"><%= post.comment_count %> comment(s) on this post &raquo;</a>
     <% else %>
-      <a href="<%= permalink(post) %>">Comment on this post</a></p>
+      <a href="<%= permalink(post) %>">Comment on this post &raquo;</a></p>
     <% end %>
     </div>
   </div>

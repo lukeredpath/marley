@@ -18,16 +18,13 @@ h1 {
 	border-top: 10px solid #FF0099;
 }
 
-h1 a,
-h2 a {
+h1 a {
 	text-decoration: none;
 	color: #000;
 }
 
-h1 a:hover,
-h2 a:hover {
-	text-decoration: underline;
-	color: #FF0099;
+h1 a:visited {
+	color: #000;
 }
 
 h2 {
@@ -41,6 +38,20 @@ h2 {
 	position: relative;
 	margin: 30px 0 20px;
 	left: -60px;
+}
+
+h2 a:link {
+	text-decoration: none;
+}
+
+h2 a:visited {
+	color: #0486DD;
+	text-decoration: none;
+}
+
+h2 a:hover {
+	text-decoration: underline;
+	color: #FF0099;
 }
 
 h2 span {
@@ -87,8 +98,26 @@ pre {
 	overflow: auto;
 }
 
+blockquote p {
+	color: #555;
+	font-style: italic;
+}
+
+blockquote cite {
+	font-size: 80%;
+}
+
 a:link {
 	color: #0486DD;
+}
+
+a:visited {
+	color: #666;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #FF0099;
 }
 
 p img {
@@ -99,6 +128,10 @@ p img {
 
 div.post {
 	margin-bottom: 30px;
+}
+
+div.comments {
+	text-align: right;
 }
 
 /** comments **/
