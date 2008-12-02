@@ -13,9 +13,21 @@
   <link href="http://<%= hostname %>/<%= @post.id %>/feed" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
   <% end %>
 
+  <script language="javascript" src="/tweet/javascripts/jquery.js" type="text/javascript"></script>
+  <script language="javascript" src="/tweet/javascripts/jquery.tweet.js" type="text/javascript"></script>
 
   <link rel="stylesheet" href="/theme/stylesheets/master.css" type="text/css" media="screen" />
   <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
+  
+  <script type='text/javascript'>
+    $(document).ready(function(){
+        $(".tweet").tweet({
+            username: "lukeredpath",
+            join_text: "",
+            count: 5,
+        });
+    });
+  </script>
 	
 </head>
 
@@ -33,6 +45,10 @@
       <p>
         <img src="http://avatar.xboxlive.com/avatar/DevilsHellion/avatar-body.png" id="avatar" />
         I am a freelance Ruby/Rails developer based in London, UK. I am currently available for hire on a contract basis.</p>
+    </div>
+    
+    <div class="tweet">
+      <h3>From Twitter</h3>
     </div>
     
     <div id="github-badge"></div>
