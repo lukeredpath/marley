@@ -18,6 +18,18 @@ h1 {
 	border-top: 10px solid #FF0099;
 }
 
+h1 a,
+h2 a {
+	text-decoration: none;
+	color: #000;
+}
+
+h1 a:hover,
+h2 a:hover {
+	text-decoration: underline;
+	color: #FF0099;
+}
+
 h2 {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 25px;

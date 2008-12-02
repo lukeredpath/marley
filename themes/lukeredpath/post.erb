@@ -11,24 +11,28 @@
   
   <div id="comments">
     
-    <h2>Comments on this article</h2>
+    <h2>Comments on this entry</h2>
+
+    <% if @post.comment_count > 0 %>
+      <% @post.comments.each_with_index do |comment, index| %>
+      <% if params[:thank_you] && comment == @post.comments.last %>
+        <div id="comment_added_thanks">Thank you for your comment!</div>
+      <% end %>
     
-    <% @post.comments.each_with_index do |comment, index| %>
-    <% if params[:thank_you] && comment == @post.comments.last %>
-      <div id="comment_added_thanks">Thank you for your comment!</div>
-    <% end %>
-    
-    <div class="comment<%= ' spam' if comment.spam? %>" id="comment_<%= comment.id %>">
-      <div class="number"><span class="nodisplay"># </span><%= index.succ %></div>
-      <h3>
-        <%= comment.url.blank? ? h(comment.author) : "<a href=\"#{h(comment.url)}\">#{h(comment.author)}</a>" %>
-        wrote on <%= comment.created_at.strftime("%d %B %Y") %>
-      </h3>
+      <div class="comment<%= ' spam' if comment.spam? %>" id="comment_<%= comment.id %>">
+        <div class="number"><span class="nodisplay"># </span><%= index.succ %></div>
+        <h3>
+          <%= comment.url.blank? ? h(comment.author) : "<a href=\"#{h(comment.url)}\">#{h(comment.author)}</a>" %>
+          wrote on <%= comment.created_at.strftime("%d %B %Y") %>
+        </h3>
       
-      <div class="message">
-        <%= markup h(comment.body) %>
+        <div class="message">
+          <%= markup h(comment.body) %>
+        </div>
       </div>
-    </div>
+      <% end %>
+    <% else %>
+      <p>There are no comments on this entry.</p>
     <% end %>
     
     <h2 id="add_comment">Add Comment</h2>
