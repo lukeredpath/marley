@@ -43,6 +43,10 @@ module Marley
       @comments ||= Marley::Comment.find_all_by_post_id(self.id)
     end
     
+    def comment_count
+      @comment_count ||= Marley::Comment.count(:conditions => {:post_id => id})
+    end
+    
     def body_html
       @body_html ||= parsers[format || :markdown].call(self.body).to_html
     end
