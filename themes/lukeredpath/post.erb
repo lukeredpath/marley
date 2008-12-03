@@ -3,7 +3,7 @@
   <div class="post">
     <h2>
       <span class="published_on"><%= @post.published_on.strftime("%d %B %Y") %></span><br />
-      <span class="title"><%=h @post.title %></span>
+      <span class="title"><%= @post.title %></span>
     </h2>
 
     <%= @post.body_html %>

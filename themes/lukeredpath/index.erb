@@ -2,7 +2,7 @@
   <div class="post" id="<%= post.id %>">
     <h2>
       <span class="published_on"><%= post.published_on.strftime("%d %B %Y") %></span><br />
-      <span class="title"><a href="<%= permalink(post) %>"><%=h post.title %></a></span>
+      <span class="title"><a href="<%= permalink(post) %>"><%= post.title %></a></span>
     </h2>
     <%= post.body_html %>
   
