@@ -120,7 +120,7 @@ a:hover {
 	color: #FF0099;
 }
 
-#container p img {
+.container p img {
 	width: 100%;
 }
 
@@ -152,6 +152,12 @@ a:hover {
 #sidebar li {
 	font-size: 15px;
 	list-style-type: none;
+}
+
+#sidebar div.section {
+	padding-bottom: 10px;
+	margin-bottom: 15px;
+	border-bottom: 1px solid #ddd;
 }
 
 /** posts **/
@@ -253,8 +259,9 @@ body #github-badge .repos li {
 
 /** about me **/
 
-#about {
+#sidebar #about {
 	margin-bottom: 18px;
+	padding-bottom: 30px;
 }
 
 #avatar {
@@ -265,7 +272,7 @@ body #github-badge .repos li {
 
 /** twitter **/
 
-ul.tweet_list {
+#sidebar ul.tweet_list {
 	color: #666;
 	line-height: 1.2;
 }

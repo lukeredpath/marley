@@ -13,8 +13,8 @@
   <link href="http://<%= hostname %>/<%= @post.id %>/feed" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
   <% end %>
 
-  <script language="javascript" src="/tweet/javascripts/jquery.js" type="text/javascript"></script>
-  <script language="javascript" src="/tweet/javascripts/jquery.tweet.js" type="text/javascript"></script>
+  <script language="javascript" src="/javascripts/github/ext/jquery.js" type="text/javascript"></script>
+  <script language="javascript" src="/javascripts/tweet/jquery.tweet.js" type="text/javascript"></script>
 
   <link rel="stylesheet" href="/theme/stylesheets/master.css" type="text/css" media="screen" />
   <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
@@ -40,27 +40,27 @@
   </div><!-- /container -->
 
   <div id="sidebar">
-    <div id="about">
+    <div id="about" class="section">
       <h3>About Me</h3>
       <p>
         <img src="http://avatar.xboxlive.com/avatar/DevilsHellion/avatar-body.png" id="avatar" />
         I am a freelance Ruby/Rails developer based in London, UK. I am currently available for hire on a contract basis.</p>
     </div>
     
-    <div class="tweet">
+    <div class="tweet section">
       <h3>From Twitter</h3>
     </div>
     
-    <div id="github-badge"></div>
+    <div id="github-badge" class="section"></div>
     <script type="text/javascript" charset="utf-8">
       GITHUB_USERNAME="lukeredpath";
       GITHUB_LIST_LENGTH=10;
       GITHUB_HEAD="h3"; 
       GITHUB_TITLE = "My GitHub Projects"
     </script>
-    <script src="http://drnicjavascript.rubyforge.org/github_badge/dist/github-badge-launcher.js" type="text/javascript"></script>
+    <script src="/javascripts/github/github-badge-launcher.js" type="text/javascript"></script>
     
-    <div id="blogroll">
+    <div id="blogroll" class="section">
       <h3>Blogroll</h3>
       <ul>
         <li><a href="http://interblah.net/">James Adam</a></li>
