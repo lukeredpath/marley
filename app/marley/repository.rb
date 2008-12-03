@@ -10,7 +10,7 @@ module Marley
       Dir[File.join(@data_directory, '*')].map { |directory|
         next if directory =~ /.draft/ && !options[:draft]
         Dir[File.join(directory, '*.txt')].first
-      }.compact
+      }.compact.sort
     end
     
     def article_with_id(id)
