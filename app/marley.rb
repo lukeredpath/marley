@@ -126,14 +126,14 @@ post '/:post_id/comments' do
   # puts params.inspect
   @comment = Marley::Comment.create( params )
   if @comment.valid?
-    redirect "/"+params[:post_id].to_s+'.html?thank_you=#comment_form'
+    redirect relative_path("/"+params[:post_id].to_s+'.html?thank_you=#comment_form')
   else
     @page_title = "#{@post.title} #{CONFIG['blog']['name']}"
     erb :post
   end
 end
 get '/:post_id/comments' do 
-  redirect "/"+params[:post_id].to_s+'.html#comments'
+  redirect relative_path("/"+params[:post_id].to_s+'.html#comments')
 end
 
 get '/:post_id/feed' do
