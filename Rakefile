@@ -96,7 +96,7 @@ namespace :generate do
   task :post do
     if article_name = ENV['name']
       article_token = article_name.downcase.squeeze(' ').gsub(/\s/, '-')
-      article_index = Dir["#{Marley::Application::DATA_DIRECTORY}/*"].select { |node| 
+      article_index = Dir["#{Marley::Configuration::DATA_DIRECTORY}/*"].select { |node| 
         File.directory?(node) 
       }.map { |dir| dir.match(/[0-9]+/)[0] }.sort.last.succ rescue "001"
       article_dir = "#{article_index}-#{article_token}"
