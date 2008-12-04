@@ -21,10 +21,15 @@
   <script src="<%= relative_path("/javascripts/application.js") %>" type="text/javascript" charset="utf-8"></script>
   
   <script type='text/javascript'>
+    $.ajaxSetup({ 
+      timeout: 5000
+    });
+  
     $(document).ready(function(){
         $(".tweet").tweet({
             username: "lukeredpath",
             join_text: "",
+            loading_text: "Loading tweets...",
             count: 5,
         });
     });
@@ -68,8 +73,9 @@
          on a contract basis.</p>
     </div>
     
-    <div class="tweet section">
+    <div class="section">
       <h3>From Twitter</h3>
+      <div class="tweet"></div>
     </div>
     
     <div id="github-badge" class="section"></div>
