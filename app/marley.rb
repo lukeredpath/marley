@@ -80,7 +80,7 @@ helpers do
   end
   
   def permalink(post)
-    "/#{post.id}.html"
+    relative_path("/#{post.id}.html")
   end
 
 end
