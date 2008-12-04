@@ -79,10 +79,12 @@ end
 
 # -----------------------------------------------------------------------------
 
-get '/' do
-  @posts = Marley::Post.published
-  @page_title = "#{CONFIG['blog']['title']}"
-  erb :index
+["/", ""].each do |root|
+  get root do
+    @posts = Marley::Post.published
+    @page_title = "#{CONFIG['blog']['title']}"
+    erb :index
+  end
 end
 
 get '/feed' do
