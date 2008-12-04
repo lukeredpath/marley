@@ -17,6 +17,10 @@ module Marley
     def self.directory_for_theme(theme_name)
       File.join(THEMES_DIRECTORY, theme_name)
     end
+    
+    def self.base_path
+      CONFIG["base_path"] || ""
+    end
 
   end
 

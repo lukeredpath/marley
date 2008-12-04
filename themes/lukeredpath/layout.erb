@@ -7,18 +7,18 @@
 
 	<title><%= h(@page_title) %></title>
 
-  <link href="http://<%= hostname %>/feed" rel="alternate" title="Feed for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
-  <link href="http://<%= hostname %>/feed/comments" rel="alternate" title="Comments for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
+  <link href="<%= absolute_url("/feed") %>" rel="alternate" title="Feed for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
+  <link href="<%= absolute_url("/feed/comments") %>" rel="alternate" title="Comments for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
   <% if @post %>
-  <link href="http://<%= hostname %>/<%= @post.id %>/feed" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
+  <link href="<%= absolute_url("/#{@post.id}/feed") %>" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
   <% end %>
 
-  <script language="javascript" src="/javascripts/github/ext/jquery.js" type="text/javascript"></script>
-  <script language="javascript" src="/javascripts/github/ext/jquery.template.js" type="text/javascript"></script>
-  <script language="javascript" src="/javascripts/tweet/jquery.tweet.js" type="text/javascript"></script>
+  <script language="javascript" src="<%= relative_path("/javascripts/github/ext/jquery.js") %>" type="text/javascript"></script>
+  <script language="javascript" src="<%= relative_path("/javascripts/github/ext/jquery.template.js") %>" type="text/javascript"></script>
+  <script language="javascript" src="<%= relative_path("/javascripts/tweet/jquery.tweet.js") %>" type="text/javascript"></script>
 
-  <link rel="stylesheet" href="/theme/stylesheets/master.css" type="text/css" media="screen" />
-  <script src="/javascripts/application.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="<%= relative_path("/theme/stylesheets/master.css") %>"  type="text/css" media="screen" />
+  <script src="<%= relative_path("/javascripts/application.js") %>" type="text/javascript" charset="utf-8"></script>
   
   <script type='text/javascript'>
     $(document).ready(function(){
@@ -59,7 +59,7 @@
       GITHUB_HEAD="h3"; 
       GITHUB_TITLE = "My GitHub Projects"
     </script>
-    <script src="/javascripts/github/github-badge-launcher.js" type="text/javascript"></script>
+    <script src="<%= relative_path("/javascripts/github/github-badge-launcher.js") %>" type="text/javascript"></script>
     
 <!--     <div id="blogroll" class="section">
       <h3>Blogroll</h3>

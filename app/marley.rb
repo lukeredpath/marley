@@ -58,6 +58,14 @@ helpers do
   def hostname
     (request.env['HTTP_X_FORWARDED_SERVER'] =~ /[a-z]*/) ? request.env['HTTP_X_FORWARDED_SERVER'] : request.env['HTTP_HOST']
   end
+  
+  def absolute_url(path)
+    "http://#{hostname}#{relative_path(path)}"
+  end
+  
+  def relative_path(path)
+    "#{Marley::Configuration.base_path}#{path}"
+  end
 
   def revision
     Marley::Configuration::REVISION || nil
