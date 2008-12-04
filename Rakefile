@@ -100,8 +100,8 @@ namespace :generate do
         File.directory?(node) 
       }.map { |dir| dir.match(/[0-9]+/)[0] }.sort.last.succ rescue "001"
       article_dir = "#{article_index}-#{article_token}"
-      FileUtils.mkdir(File.join(Marley::Application::DATA_DIRECTORY, article_dir))
-      File.open(File.join(Marley::Application::DATA_DIRECTORY, article_dir, "article.txt"), 'w') do |io|
+      FileUtils.mkdir(File.join(Marley::Configuration::DATA_DIRECTORY, article_dir))
+      File.open(File.join(Marley::Configuration::DATA_DIRECTORY, article_dir, "article.txt"), 'w') do |io|
         io << "# #{article_name}\n"
       end
     else
