@@ -158,7 +158,7 @@ post '/sync' do
     throw :halt, [500, "You did wrong.\n"] and return
   else
     # Synchronize articles in data directory to Github repo
-    system "cd #{CONFIG['data_directory']}; git pull origin master"
+    system "cd #{Marley::Post.data_directory}; git pull origin master"
   end
 end
 
