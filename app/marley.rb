@@ -14,6 +14,8 @@ require File.join(File.dirname(__FILE__), '..', 'vendor', 'githubber')   # ... g
 MARLEY_ROOT = File.join(File.dirname(__FILE__), '..') unless defined?(MARLEY_ROOT)
 CONFIG = YAML.load_file( File.join(MARLEY_ROOT, 'config', 'config.yml') ) unless defined?(CONFIG)
 
+APP_ROOT = CONFIG['app_root'] || "/" # used to run app under sub-directories
+
 # -----------------------------------------------------------------------------
 
 # FIXME : There must be a clean way to do this :)
@@ -79,32 +81,32 @@ end
 
 # -----------------------------------------------------------------------------
 
-get '/' do
+get APP_ROOT do
   @posts = Marley::Post.published
   @page_title = "#{CONFIG['blog']['title']}"
   erb :index
 end
 
-get '/feed' do
+get "#{APP_ROOT}feed" do
   @posts = Marley::Post.published
   last_modified( @posts.first.updated_on )           # Conditinal GET, send 304 if not modified
   builder :index
 end
 
-get '/feed/comments' do
+get "#{APP_ROOT}feed/comments" do
   @comments = Marley::Comment.recent.ham
   last_modified( @comments.first.created_at )        # Conditinal GET, send 304 if not modified
   builder :comments
 end
 
-get '/:post_id.html' do
+get "#{APP_ROOT}:post_id.html" do
   @post = Marley::Post[ params[:post_id] ]
   throw :halt, [404, not_found ] unless @post
   @page_title = "#{@post.title} #{CONFIG['blog']['name']}"
   erb :post 
 end
 
-post '/:post_id/comments' do
+post "#{APP_ROOT}:post_id/comments" do
   @post = Marley::Post[ params[:post_id] ]
   throw :halt, [404, not_found ] unless @post
   params.merge!( {
@@ -122,18 +124,19 @@ post '/:post_id/comments' do
     erb :post
   end
 end
-get '/:post_id/comments' do 
+
+get "#{APP_ROOT}:post_id/comments" do 
   redirect "/"+params[:post_id].to_s+'.html#comments'
 end
 
-get '/:post_id/feed' do
+get "#{APP_ROOT}:post_id/feed" do
   @post = Marley::Post[ params[:post_id] ]
   throw :halt, [404, not_found ] unless @post
   last_modified( @post.comments.last.created_at ) if @post.comments.last # Conditinal GET, send 304 if not modified
   builder :post
 end
 
-get '/theme/stylesheets/:stylesheet.css' do
+get "#{APP_ROOT}theme/stylesheets/:stylesheet.css" do
   stylesheet_path = File.join(THEME_DIRECTORY, 'stylesheets', params[:stylesheet] + '.css')
   if File.exist?(stylesheet_path)
     send_file stylesheet_path, :type => 'text/css', :disposition => 'inline', :stream => false
@@ -142,7 +145,7 @@ get '/theme/stylesheets/:stylesheet.css' do
   end
 end
 
-post '/sync' do
+post "#{APP_ROOT}sync" do
   throw :halt, 404 and return if not CONFIG['github_token'] or CONFIG['github_token'].nil?
   unless params[:token] && params[:token] == CONFIG['github_token']
     throw :halt, [500, "You did wrong.\n"] and return
@@ -152,7 +155,7 @@ post '/sync' do
   end
 end
 
-get '/about' do
+get "#{APP_ROOT}about" do
   "<p style=\"font-family:sans-serif\">I'm running on Sinatra version " + Sinatra::VERSION + '</p>'
 end
 
