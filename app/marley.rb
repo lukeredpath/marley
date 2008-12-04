@@ -59,8 +59,8 @@ helpers do
     (request.env['HTTP_X_FORWARDED_SERVER'] =~ /[a-z]*/) ? request.env['HTTP_X_FORWARDED_SERVER'] : request.env['HTTP_HOST']
   end
   
-  def absolute_url(path)
-    "http://#{hostname}#{relative_path(path)}"
+  def absolute_url(path = "")
+    "http://#{hostname}#{relative_path(path)}".strip
   end
   
   def relative_path(path)
