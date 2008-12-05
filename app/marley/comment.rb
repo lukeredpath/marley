@@ -1,10 +1,10 @@
 module Marley
 
-  # = Comments for articles
-  # .db file is created in Marley::Configuration::DATA_DIRECTORY (set in <tt>config.yml</tt>)
   class Comment < ActiveRecord::Base
+    include Marley::Configuration
+    extend  Marley::Configuration
 
-    ActiveRecord::Base.establish_connection( :adapter => 'sqlite3', :database => File.join(Configuration::DATA_DIRECTORY, 'comments.db') )
+    ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => comments_database_path)
 
     belongs_to :post
 

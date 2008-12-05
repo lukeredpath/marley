@@ -28,9 +28,11 @@ unless defined?(THEME_DIRECTORY)
   THEME_DIRECTORY = Marley::Configuration.directory_for_theme(CONFIG['theme'] || Marley::Configuration::DEFAULT_THEME)
 end
 
+include Marley::Configuration
+
 configure do
   set_options :views => THEME_DIRECTORY if File.directory?(THEME_DIRECTORY)
-  Marley::Post.data_directory = Marley::Configuration::DATA_DIRECTORY
+  Marley::Post.data_directory = marley_config.data_directory
 end
 
 configure :production do
@@ -81,6 +83,10 @@ helpers do
   
   def permalink(post)
     relative_path("/#{post.id}.html")
+  end
+  
+  def config
+    Marley::Configuration.config
   end
 
 end

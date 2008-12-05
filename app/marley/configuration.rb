@@ -1,9 +1,20 @@
+require 'simple_config'
+
 module Marley
 
   module Configuration
-
-    # Override this as you wish in <tt>config/config.yml</tt>
-    DATA_DIRECTORY = File.join(MARLEY_ROOT, CONFIG['data_directory']) unless defined?(DATA_DIRECTORY)
+    
+    SimpleConfig.for(:marley) do
+      load File.join(MARLEY_ROOT, "config", "config.yml"), :if_exists? => true  
+    end
+    
+    def marley_config
+      SimpleConfig.for(:marley)
+    end
+    
+    def comments_database_path
+      File.join(marley_config.data_directory, 'comments.db')
+    end
     
     unless defined?(REVISION)
       REVISION_NUMBER = File.read( File.join(MARLEY_ROOT, '..', 'REVISION') ) rescue nil
