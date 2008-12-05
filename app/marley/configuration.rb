@@ -8,6 +8,7 @@ module Marley
       set :base_path, ""
       set :theme,     "default"
       
+      load File.join(MARLEY_ROOT, "config", "config.example.yml")
       load File.join(MARLEY_ROOT, "config", "config.yml"), :if_exists? => true  
     end
     
