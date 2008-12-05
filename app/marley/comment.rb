@@ -20,8 +20,8 @@ module Marley
     # See http://railscasts.com/episodes/65-stopping-spam-with-akismet
     def akismet_attributes
       {
-        :key                  => CONFIG['akismet']['key'],
-        :blog                 => CONFIG['akismet']['url'],
+        :key                  => marley_config.akismet.key,
+        :blog                 => marley_config.akismet.url,
         :user_ip              => self.ip,
         :user_agent           => self.user_agent,
         :referrer             => self.referrer,

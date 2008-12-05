@@ -87,7 +87,7 @@ end
 ["/", ""].each do |root|
   get root do
     @posts = Marley::Post.published
-    @page_title = "#{CONFIG['blog']['title']}"
+    @page_title = marley_config.blog.title
     erb :index
   end
 end
@@ -107,7 +107,7 @@ end
 get '/:post_id.html' do
   @post = Marley::Post[ params[:post_id] ]
   throw :halt, [404, not_found ] unless @post
-  @page_title = "#{@post.title} #{CONFIG['blog']['name']}"
+  @page_title = "#{@post.title} #{marley_config.blog.name}"
   erb :post 
 end
 
@@ -125,7 +125,7 @@ post '/:post_id/comments' do
   if @comment.valid?
     redirect relative_path("/"+params[:post_id].to_s+'.html?thank_you=#comment_form')
   else
-    @page_title = "#{@post.title} #{CONFIG['blog']['name']}"
+    @page_title = "#{@post.title} #{marley_config.blog.name}"
     erb :post
   end
 end
@@ -150,8 +150,8 @@ get '/theme/stylesheets/:stylesheet.css' do
 end
 
 post '/sync' do
-  throw :halt, 404 and return if not CONFIG['github_token'] or CONFIG['github_token'].nil?
-  unless params[:token] && params[:token] == CONFIG['github_token']
+  throw :halt, 404 and return unless marley_config.github_token
+  unless params[:token] && params[:token] == marley_config.github_token
     throw :halt, [500, "You did wrong.\n"] and return
   else
     # Synchronize articles in data directory to Github repo
