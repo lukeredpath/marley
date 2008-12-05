@@ -32,7 +32,7 @@ namespace :app do
     end
     desc "Create database for comments"
     task :create_database_for_comments do
-      puts "* Creating comments SQLite database in #{Marley::Configuration::DATA_DIRECTORY}/comments.db"
+      puts "* Creating comments SQLite database in #{comments_database_path}"
       ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => comments_database_path)
       load(File.join( MARLEY_ROOT, 'config', 'db_create_comments.rb' ))
     end
