@@ -16,11 +16,6 @@ module Marley
       File.join(marley_config.data_directory, 'comments.db')
     end
     
-    unless defined?(REVISION)
-      REVISION_NUMBER = File.read( File.join(MARLEY_ROOT, '..', 'REVISION') ) rescue nil
-      REVISION = REVISION_NUMBER ? Githubber.new({:user => 'karmi', :repo => 'marley'}).revision( REVISION_NUMBER.chomp ) : nil
-    end
-    
     THEMES_DIRECTORY = File.join(MARLEY_ROOT, 'themes') unless defined?(THEMES_DIRECTORY)
     
     DEFAULT_THEME = "default" unless defined?(DEFAULT_THEME)

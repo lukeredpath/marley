@@ -5,7 +5,6 @@ require 'sinatra'          # ... Classy web-development dressed in DSL, http://s
 require 'activerecord'     # ... or Datamapper? What? :)
 
 require File.join(File.dirname(__FILE__), '..', 'vendor', 'akismetor')   # ... disable comment spam
-require File.join(File.dirname(__FILE__), '..', 'vendor', 'githubber')   # ... get repo info
 
 # ... or alternatively, run Sinatra on edge ...
 # $:.unshift File.dirname(__FILE__) + 'vendor/sinatra/lib'
@@ -67,10 +66,6 @@ helpers do
   
   def relative_path(path)
     "#{Marley::Configuration.base_path}#{path}"
-  end
-
-  def revision
-    Marley::Configuration::REVISION || nil
   end
 
   def not_found
