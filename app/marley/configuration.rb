@@ -6,6 +6,7 @@ module Marley
     
     SimpleConfig.for(:marley) do
       set :base_path, ""
+      set :theme,     "default"
       
       load File.join(MARLEY_ROOT, "config", "config.yml"), :if_exists? => true  
     end
@@ -19,7 +20,7 @@ module Marley
     end
     
     def marley_theme_directory
-      File.join(MARLEY_ROOT, "themes", marley_config.theme || "default")
+      File.join(MARLEY_ROOT, "themes", marley_config.theme)
     end
     
     def marley_theme_stylesheet_path(stylesheet_name)
