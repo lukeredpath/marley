@@ -50,8 +50,7 @@ class MarleyTest < Test::Unit::TestCase
   end
 
   def test_should_show_article_page
-    get_it '/test-article.html'
-    # p @response.body
+    get_it '/test-article-one.html'
     assert @response.status == 200
     assert @response.body =~ Regexp.new( 
            Regexp.escape("<h1>\n    This is the test article one\n    <span class=\"meta\">\n      23|12|2050") ),
