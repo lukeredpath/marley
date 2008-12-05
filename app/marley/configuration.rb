@@ -16,12 +16,12 @@ module Marley
       File.join(marley_config.data_directory, 'comments.db')
     end
     
-    THEMES_DIRECTORY = File.join(MARLEY_ROOT, 'themes') unless defined?(THEMES_DIRECTORY)
+    def marley_theme_directory
+      File.join(MARLEY_ROOT, "themes", marley_config.theme || "default")
+    end
     
-    DEFAULT_THEME = "default" unless defined?(DEFAULT_THEME)
-
-    def self.directory_for_theme(theme_name)
-      File.join(THEMES_DIRECTORY, theme_name)
+    def marley_theme_stylesheet_path(stylesheet_name)
+      File.join(marley_theme_directory, "stylesheets", "#{stylesheet_name}.css")
     end
     
     def self.base_path

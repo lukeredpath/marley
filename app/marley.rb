@@ -23,14 +23,10 @@ end
 
 # -----------------------------------------------------------------------------
 
-unless defined?(THEME_DIRECTORY)
-  THEME_DIRECTORY = Marley::Configuration.directory_for_theme(CONFIG['theme'] || Marley::Configuration::DEFAULT_THEME)
-end
-
 include Marley::Configuration
 
 configure do
-  set_options :views => THEME_DIRECTORY if File.directory?(THEME_DIRECTORY)
+  set_options :views => marley_theme_directory
   Marley::Post.data_directory = marley_config.data_directory
 end
 
@@ -145,7 +141,7 @@ get '/:post_id/feed' do
 end
 
 get '/theme/stylesheets/:stylesheet.css' do
-  stylesheet_path = File.join(THEME_DIRECTORY, 'stylesheets', params[:stylesheet] + '.css')
+  stylesheet_path = marley_theme_stylesheet_path(params[:stylesheet])
   if File.exist?(stylesheet_path)
     send_file stylesheet_path, :type => 'text/css', :disposition => 'inline', :stream => false
   else

@@ -33,9 +33,11 @@ load File.join(MARLEY_ROOT, 'config', 'db_create_comments.rb' )
 
 
 class MarleyTest < Test::Unit::TestCase
+  include Marley::Configuration
 
   configure do
-    set_options :views => Marley::Configuration.directory_for_theme(Marley::Configuration::DEFAULT_THEME)
+    marley_config.stubs(:theme).returns("default")
+    set_options :views => marley_theme_directory
   end
   
   def setup
