@@ -1,3 +1,5 @@
+require 'akismetor'
+
 module Marley
 
   class Comment < ActiveRecord::Base

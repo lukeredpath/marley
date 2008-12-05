@@ -6,6 +6,9 @@ require 'ftools'
 
 MARLEY_ROOT = '.'
 
+$:.unshift File.join(MARLEY_ROOT, 'vendor')
+$:.unshift File.join(MARLEY_ROOT, 'vendor/simpleconfig-1.0.1/lib')
+
 %w{configuration post comment}.each { |f| require File.join(MARLEY_ROOT, 'app', 'marley', f) }
 
 include Marley::Configuration
