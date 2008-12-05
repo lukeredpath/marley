@@ -61,7 +61,7 @@ helpers do
   end
   
   def relative_path(path)
-    "#{Marley::Configuration.base_path}#{path}"
+    "#{marley_config.base_path}#{path}"
   end
 
   def not_found

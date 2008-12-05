@@ -5,6 +5,8 @@ module Marley
   module Configuration
     
     SimpleConfig.for(:marley) do
+      set :base_path, ""
+      
       load File.join(MARLEY_ROOT, "config", "config.yml"), :if_exists? => true  
     end
     
@@ -22,10 +24,6 @@ module Marley
     
     def marley_theme_stylesheet_path(stylesheet_name)
       File.join(marley_theme_directory, "stylesheets", "#{stylesheet_name}.css")
-    end
-    
-    def self.base_path
-      CONFIG["base_path"] || ""
     end
 
   end
