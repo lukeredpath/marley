@@ -7,7 +7,7 @@
 
 	<title><%= h(@page_title) %> | the blog of luke redpath</title>
 
-  <link href="<%= absolute_url("/feed") %>" rel="alternate" title="Feed for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
+  <link href="http://feeds.feedburner.com/LukeRedpath" rel="alternate" title="Feed for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
   <link href="<%= absolute_url("/feed/comments") %>" rel="alternate" title="Comments for <%= h(CONFIG['blog']['title']) %>" type="application/atom+xml" />
   <% if @post %>
   <link href="<%= absolute_url("/#{@post.id}/feed") %>" rel="alternate" title="Feed for comments on article &ldquo;<%= h(@post.title) %>&rdquo; <%= h(CONFIG['blog']['name']) %>" type="application/atom+xml" />
