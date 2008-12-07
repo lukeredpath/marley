@@ -28,6 +28,7 @@ include Marley::Configuration
 configure do
   set_options :views => marley_theme_directory
   Marley::Post.data_directory = marley_config.data_directory
+  Marley::Comment.set_human_verification_question("What is thirteen multiplied by two?", "26")
 end
 
 configure :production do

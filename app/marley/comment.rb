@@ -14,8 +14,11 @@ module Marley
     named_scope :ham, :conditions => { :spam => false }
 
     validates_presence_of :author, :email, :body, :post_id
+    validate :author_is_human?
 
     before_create :fix_urls, :check_spam
+    
+    attr_accessor :human_verification_answer
     
     private
 
@@ -48,6 +51,26 @@ module Marley
       self.url.gsub!(/^(.*)/, 'http://\1') unless self.url =~ %r{^http://} or self.url.empty?
     end
     
+    class << self
+      attr_reader :human_verification_question
+      
+      def set_human_verification_question(question, answer)
+        @human_verification_question = question
+        @human_verification_answer = answer
+      end
+      
+      def check_human_verification_answer(answer)
+        answer == @human_verification_answer
+      end
+    end
+    
+    def author_is_human?
+      if self.class.human_verification_question
+        unless self.class.check_human_verification_answer(human_verification_answer)
+          errors.add(:human_verification_answer, "is incorrect")
+        end
+      end
+    end
   end
 
 end

@@ -64,6 +64,16 @@
           <label>Your website</label>
           <input type="text" class="text" name="url" value="" id="url" />
         </div>
+        
+        <div class="field">
+          <label><%= Marley::Comment.human_verification_question %></label>
+          <input type="text" class="text" name="human_verification_answer" value="" id="url" />
+          <span>Anti-spam verification question</span>
+        </div>
+        
+        <% if  @comment and @comment.errors.on(:human_verification_answer) %>
+          <div class="error">Answer <%= @comment.errors.on(:human_verification_answer).first %></div>
+        <% end %>
 
         <div class="field">
           <label>Message</label>
