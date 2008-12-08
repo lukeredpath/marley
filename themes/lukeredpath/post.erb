@@ -47,7 +47,7 @@
         </div>
         
         <% if  @comment and @comment.errors.on(:author) %>
-          <div class="error">Author <%= @comment.errors.on(:author).first %></div>
+          <div class="error">Author <%= [@comment.errors.on(:author)].flatten.first %></div>
         <% end %>
         
         <div class="field">
@@ -57,7 +57,7 @@
         </div>
         
         <% if  @comment and @comment.errors.on(:email) %>
-          <div class="error">E-Mail <%= @comment.errors.on(:email).first %></div>
+          <div class="error">E-Mail <%= [@comment.errors.on(:email)].flatten.first %></div>
         <% end %>
 
         <div class="field">
@@ -72,7 +72,7 @@
         </div>
         
         <% if  @comment and @comment.errors.on(:human_verification_answer) %>
-          <div class="error">Answer <%= @comment.errors.on(:human_verification_answer).first %></div>
+          <div class="error">Answer <%= [@comment.errors.on(:human_verification_answer)].flatten.first %></div>
         <% end %>
 
         <div class="field">
@@ -82,7 +82,7 @@
         </div>
         
         <% if @comment and @comment.errors.on(:body) %>
-          <div class="error">Message <%= @comment.errors.on(:body).first %></div>
+          <div class="error">Message <%= [@comment.errors.on(:body)].flatten.first %></div>
         <% end %>
 
         <input class="submit" type="submit" value="Submit Comment" accesskey="s" />
