@@ -38,6 +38,7 @@ configure :production do
   $logger.level = Logger::INFO
   not_found { not_found }
   error     { error }
+  Marley::Comment.set_human_verification_question("What is 4 multiplied by 3?", "12")
 end
 
 helpers do
