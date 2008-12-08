@@ -64,7 +64,8 @@
           <label>Your website</label>
           <input type="text" class="text" name="url" value="" id="url" />
         </div>
-        
+
+      <% if Marley::Comment.human_verification_question %>
         <div class="field">
           <label><%= Marley::Comment.human_verification_question %></label>
           <input type="text" class="text" name="human_verification_answer" value="" id="url" />
@@ -74,6 +75,7 @@
         <% if  @comment and @comment.errors.on(:human_verification_answer) %>
           <div class="error">Answer <%= [@comment.errors.on(:human_verification_answer)].flatten.first %></div>
         <% end %>
+      <% end %>
 
         <div class="field">
           <label>Message</label>
