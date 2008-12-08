@@ -13,6 +13,8 @@ MARLEY_ROOT = File.join(File.dirname(__FILE__), '..') unless defined?(MARLEY_ROO
 $:.unshift File.join(MARLEY_ROOT, 'vendor')
 $:.unshift File.join(MARLEY_ROOT, 'vendor/simpleconfig-1.0.1/lib')
 
+$logger = Logger.new(File.join(MARLEY_ROOT, 'log', 'marley.log'))
+
 # -----------------------------------------------------------------------------
 
 # FIXME : There must be a clean way to do this :)
@@ -26,12 +28,14 @@ end
 include Marley::Configuration
 
 configure do
+  $logger.level = Logger::DEBUG
   set_options :views => marley_theme_directory
   Marley::Post.data_directory = marley_config.data_directory
-  puts "::: Reading data from #{File.expand_path(marley_config.data_directory)}"
+  $logger.info("Using log directory #{File.expand_path(marley_config.data_directory)}")
 end
 
 configure :production do
+  $logger.level = Logger::INFO
   not_found { not_found }
   error     { error }
 end
