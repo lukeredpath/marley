@@ -40,6 +40,15 @@ h2 {
 	left: -60px;
 }
 
+h2 br {
+	display: none;
+}
+
+h2 .title {
+	line-height: 1;
+	display: block;
+}
+
 h2 a:link {
 	text-decoration: none;
 }
@@ -64,6 +73,8 @@ h2 .published_on {
 	color: #FF0099;
 	font-size: 70%;
 	text-transform: uppercase;
+	display: block;
+	margin: 0 0 5px; padding: 0;
 }
 
 h3 {
