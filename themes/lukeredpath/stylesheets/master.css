@@ -131,6 +131,10 @@ a:hover {
 	color: #FF0099;
 }
 
+a img {
+	border: none;
+}
+
 /** sidebar **/
 
 #sidebar {
@@ -177,9 +181,9 @@ div.comments {
 	text-align: right;
 }
 
-/** comments **/
+/** disqus comments **/
 
-div.comment {
+#dsq-content #dsq-comments .dsq-comment {
 	background: #eee;
 	padding: 15px 50px;
 	margin: 0 0 20px;
@@ -187,7 +191,7 @@ div.comment {
 	font-size: 18px;
 }
 
-div.comment .number {
+.dsq-comment .number {
 	position: absolute;
 	top: 0; left: 0;
 	background: #ccc;
@@ -199,7 +203,7 @@ div.comment .number {
 	font-size: 28px;
 }
 
-div.comment h3 {
+.dsq-comment h3 {
 	font-size: 13px;
 	text-transform: uppercase;
 }
