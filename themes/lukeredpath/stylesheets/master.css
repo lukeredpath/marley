@@ -181,9 +181,9 @@ div.comments {
 	text-align: right;
 }
 
-/** disqus comments **/
+/** comments **/
 
-#dsq-content #dsq-comments .dsq-comment {
+div.comment {
 	background: #eee;
 	padding: 15px 50px;
 	margin: 0 0 20px;
@@ -191,7 +191,7 @@ div.comments {
 	font-size: 18px;
 }
 
-.dsq-comment .number {
+div.comment .number {
 	position: absolute;
 	top: 0; left: 0;
 	background: #ccc;
@@ -203,7 +203,7 @@ div.comments {
 	font-size: 28px;
 }
 
-.dsq-comment h3 {
+div.comment h3 {
 	font-size: 13px;
 	text-transform: uppercase;
 }
