@@ -90,7 +90,6 @@ namespace :server do
   
 end
 
-
 namespace :generate do
   
   task :post do
@@ -110,4 +109,8 @@ namespace :generate do
     end
   end
   
+end
+
+task :export_comments do
+  puts Marley::Comment.all.map(&:attributes).to_yaml
 end
