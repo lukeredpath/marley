@@ -181,6 +181,31 @@ div.comments {
 	text-align: right;
 }
 
+/** disqus comments **/
+
+#dsq-content #dsq-comments .dsq-comment {
+	background: #eee;
+	padding: 15px 50px;
+	margin: 0 0 20px;
+	font-size: 18px;
+}
+
+body #dsq-content #dsq-comments .dsq-comment-header {
+	font-size: 13px;
+	font-family: Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+	background-color: #ccc;
+	padding: 0;
+}
+
+body #dsq-content #dsq-comments .dsq-comment-body {
+	padding: 5px;
+}
+
+body #dsq-content #dsq-comments .dsq-comment-footer {
+	padding: 5px;
+}
+
 /** comments **/
 
 div.comment {
