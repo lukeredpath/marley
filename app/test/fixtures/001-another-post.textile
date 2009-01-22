@@ -1,0 +1,4 @@
+---
+:title: A textile post
+---
+This is a *textile* post.

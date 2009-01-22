@@ -8,74 +8,63 @@ module Marley
 
   class Post
     
-    attr_reader :id, :title, :perex, :body, :published_on, :updated_on, :published, :categories, :format
-    
-    # comments are referenced via +has_many+ in Comment
-    
-    def initialize(options={})
-      options.each_pair { |key, value| instance_variable_set("@#{key}", value) if self.respond_to? key }
+    def self.parse(id, post_data, format = :plain)
+      new(id, post_data.split('---').last.strip, YAML.load(post_data), format)
     end
-  
-    class << self
-      
-      attr_accessor :data_directory
-
-      def all(options={})
-        self.find_all options.merge(:draft => true)
-      end
     
-      def published(options={})
-        self.find_all options.merge(:draft => false)
+    def self.open(path_to_file, options={})
+      options = {:convert_underscores => false}.merge(options)
+      post = nil
+      File.open(path_to_file, 'r') do |io|
+        extension = File.extname(path_to_file)
+        file_name = File.basename(path_to_file, extension).gsub(/^[0-9]+\-/, '')
+        file_name.gsub!(/_/, '-') if options[:convert_underscores]
+        post = self.parse(file_name, io.read, extension[1..-1].to_sym)
       end
-  
-      def [](id, options={})
-        self.find_one(id, options)
+      return post
+    end
+    
+    attr_reader :metadata, :body, :id
+    attr_accessor :format
+    
+    def initialize(id, body, metadata = {}, format = :plain)
+      @id = id
+      @body = body
+      @metadata = metadata
+      self.format = format
+    end
+    
+    def title
+      @metadata[:title]
+    end
+    
+    def published_on
+      DateTime.parse(@metadata[:published_on])
+    end
+    
+    def to_html
+      parsers[format].call(@body)
+    end
+    
+    def format=(new_format)
+      if parsers.has_key?(new_format)
+        @format = new_format
+      else
+        @format = :plain
       end
-      alias :find :[] # For +belongs_to+ in Comment
-      
     end
 
     def permalink
       "/#{id}.html"
     end
-    
-    def comments
-      @comments ||= Marley::Comment.find_all_by_post_id(self.id)
-    end
-    
-    def comment_count
-      @comment_count ||= Marley::Comment.count(:conditions => {:post_id => id})
-    end
-    
-    def body_html
-      @body_html ||= parsers[format || :markdown].call(self.body).to_html
-    end
             
     private
     
-    def self.repository
-      Repository.new(data_directory)
-    end
-    
-    def self.find_all(options={})
-      options[:except] ||= ['body', 'body_html']
-      posts = repository.all_articles.map do |file|
-        PostBuilder.new(File.dirname(file)).build
-      end
-      return posts.reverse
-    end
-    
-    def self.find_one(id, options={})
-      options.merge!(:draft => true)
-      if file = repository.article_with_id(id)
-        PostBuilder.new(File.dirname(file)).build
-      end
-    end
-    
     def parsers
       @parsers ||= {
-        :textile  => proc{ |body| RedCloth.new(body) },
-        :markdown => proc{ |body| RDiscount.new(body) }
+        :plain    => proc{ |body| body },
+        :textile  => proc{ |body| RedCloth.new(body).to_html },
+        :markdown => proc{ |body| RDiscount.new(body).to_html.strip }
       }
     end
   end
