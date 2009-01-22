@@ -67,6 +67,10 @@ module Marley
     def ==(other_post)
       hash == other_post.hash
     end
+    
+    def <=>(other_post)
+      other_post.published_on <=> published_on
+    end
             
     private
     

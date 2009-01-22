@@ -81,6 +81,11 @@ This is a _markdown_ post.
       @post.format = :doohickey
       assert_equal :plain, @post.format
     end
+    
+    should "equal another post with the same id and body" do
+      another_post = Marley::Post.new(@post.id, @post.body)
+      assert_equal @post, another_post
+    end
   end
   
   context "A post, read from a file" do
@@ -116,5 +121,19 @@ This is a _markdown_ post.
     end
   end
   
+  context "A collection of posts" do
+    setup do
+      @posts = [
+        @post_one   = Marley::Post.new('post-one', 'body', :published_on => '22-01-2009'),
+        @post_two   = Marley::Post.new('post-two', 'body', :published_on => '10-01-2009'),
+        @post_three = Marley::Post.new('post-thr', 'body', :published_on => '15-01-2009')
+      ]
+    end
+
+    should "be be sortable by their published_on date, most recent first" do
+      assert_equal [@post_one, @post_three, @post_two], @posts.sort
+    end
+  end
+
 end
 
