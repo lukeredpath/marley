@@ -1,3 +1,0 @@
-[submodule "vendor/norman-disqus"]
-	path = vendor/norman-disqus
-	url = git://github.com/norman/disqus.git
