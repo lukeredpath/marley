@@ -22,28 +22,25 @@ module Marley
         file_name = File.basename(path_to_file, extension).gsub(/^[0-9]+\-/, '')
         file_name.gsub!(/_/, '-') if options[:convert_underscores]
         post = self.parse(file_name, io.read, extension[1..-1].to_sym)
+        post.published_on = File.ctime(path_to_file) unless post.published_on
         post.updated_on = File.mtime(path_to_file)
       end
       return post
     end
     
     attr_reader :metadata, :body, :id
-    attr_accessor :format, :updated_on
+    attr_accessor :format, :published_on, :updated_on
     
     def initialize(id, body, metadata = {}, format = :plain)
       @id = id
       @body = body
       @metadata = metadata
       self.format = format
+      self.published_on = DateTime.parse(@metadata[:published_on]) if @metadata[:published_on]
     end
     
     def title
       @metadata[:title]
-    end
-    
-    def published_on
-      return Date.parse('01/01/1900') unless @metadata[:published_on]
-      DateTime.parse(@metadata[:published_on])
     end
     
     def to_html

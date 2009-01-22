@@ -121,8 +121,14 @@ This is a _markdown_ post.
     
     should "ignore any numeric prefix in the file name" do
       file = File.join(File.dirname(__FILE__), *%w[fixtures 001-another-post.textile])
-      post = Marley::Post.open(file, :convert_underscores => true)
+      post = Marley::Post.open(file)
       assert_equal 'another-post', post.id
+    end
+    
+    should "use the file created at time as the published_on if none specified in the metadata" do
+      file = File.join(File.dirname(__FILE__), *%w[fixtures example_post.textile])
+      post = Marley::Post.open(file)
+      assert_equal File.ctime(file), post.published_on
     end
   end
   
