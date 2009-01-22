@@ -7,8 +7,9 @@ module Marley
     
     def all
       Dir[File.join(@data_directory, '*')].map { |file|
+        next unless File.extname(file) =~ /txt|markdown|textile/
         Marley::Post.open(file)
-      }
+      }.compact
     end
     
     def find(id)

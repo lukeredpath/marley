@@ -11,7 +11,7 @@ xml.feed :'xml:lang' => 'en-US', :xmlns => 'http://www.w3.org/2005/Atom' do
       entry.id absolute_url("/#{comment.post.id}.html#comment_#{index}")
       xml.updated rfc_date(comment.created_at)
       entry.link :type => 'text/html', :href => absolute_url("/#{comment.post.id}.html#comment_#{index}"), :rel => 'alternate'
-      entry.title "#{h comment.author} said on #{h human_date(comment.created_at)}"
+      entry.title "Comment on #{comment.post.title} by #{h comment.author}"
       entry.content h(comment.body), :type => 'html'
       entry.author do |author|
         author.name  comment.author

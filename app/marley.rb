@@ -12,6 +12,9 @@ MARLEY_ROOT = File.join(File.dirname(__FILE__), '..') unless defined?(MARLEY_ROO
 
 $:.unshift File.join(MARLEY_ROOT, 'vendor')
 $:.unshift File.join(MARLEY_ROOT, 'vendor/simpleconfig-1.0.1/lib')
+$:.unshift File.join(MARLEY_ROOT, 'vendor/norman-disqus/lib')
+
+require 'disqus'
 
 $logger = Logger.new(File.join(MARLEY_ROOT, 'log', 'marley.log'))
 
@@ -31,7 +34,8 @@ configure do
   $logger.level = Logger::DEBUG
   set_options :views => marley_theme_directory
   Marley::Repository.default_data_directory = marley_config.data_directory
-  $logger.info("Using log directory #{File.expand_path(marley_config.data_directory)}")
+  Disqus.defaults[:account] = marley_config.disqus_account
+  Disqus.defaults[:api_key] = marley_config.disqus_api_key
 end
 
 configure :production do
@@ -106,7 +110,7 @@ get "/archive" do
 end
 
 get '/feed' do
-  @posts = Marley::Repository.default.all.sort.first(10)
+  @posts = Marley::Repository.default.all.sort
   last_modified( @posts.first.updated_on )
   builder :index
 end

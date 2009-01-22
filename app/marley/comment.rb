@@ -8,8 +8,6 @@ module Marley
 
     ActiveRecord::Base.establish_connection(:adapter => 'sqlite3', :database => comments_database_path)
 
-    belongs_to :post
-
     named_scope :recent,   :order => 'created_at DESC', :limit => 50
     named_scope :ham, :conditions => { :spam => false }
 
@@ -19,6 +17,10 @@ module Marley
     before_create :fix_urls, :check_spam
     
     attr_accessor :human_verification_answer
+    
+    def post
+      @post ||= Marley::Repository.default.find(self.post_id)
+    end
     
     private
 
