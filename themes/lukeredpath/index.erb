@@ -1,4 +1,4 @@
-<% @posts.first(10).each do |post| %>
+<% @posts.each do |post| %>
   <div class="post" id="<%= post.id %>">
     <h2>
       <span class="published_on"><%= post.published_on.strftime("%d %B %Y") %></span><br />

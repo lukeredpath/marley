@@ -92,21 +92,21 @@ end
 
 ["/", ""].each do |root|
   get root do
-    @posts = Marley::Repository.default.all.sort
+    @posts = Marley::Repository.default.all.sort.first(10)
     @page_title = marley_config.blog.title
     erb :index
   end
 end
 
 get '/feed' do
-  @posts = Marley::Repository.default.all.sort
-  last_modified( @posts.first.updated_on )           # Conditinal GET, send 304 if not modified
+  @posts = Marley::Repository.default.all.sort.first(10)
+  last_modified( @posts.first.updated_on )
   builder :index
 end
 
 get '/feed/comments' do
   @comments = Marley::Comment.recent.ham
-  last_modified( @comments.first.created_at )        # Conditinal GET, send 304 if not modified
+  last_modified( @comments.first.created_at )
   builder :comments
 end
 
