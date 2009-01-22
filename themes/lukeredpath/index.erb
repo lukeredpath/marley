@@ -5,6 +5,8 @@
       <span class="title"><a href="<%= permalink(post) %>"><%= post.title %></a></span>
     </h2>
     <%= post.to_html %>
+    <div class="comments"><a href="<%= permalink(post) %>#disqus_thread">View Comments</a></div>
+    <%=  Disqus::Widget.comment_counts %>
   </div>
 <% end %>
 
