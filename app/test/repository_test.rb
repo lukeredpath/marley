@@ -1,5 +1,6 @@
 require File.join(File.dirname(__FILE__), 'test_helper')
 require 'repository'
+require 'post'
 
 class RepositoryTest < Test::Unit::TestCase
   

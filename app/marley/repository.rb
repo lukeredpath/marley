@@ -1,5 +1,3 @@
-require 'post'
-
 module Marley
   
   class Repository
@@ -16,6 +14,15 @@ module Marley
     def find(id)
       if file = Dir[File.join(@data_directory, '*')].find { |dir| dir =~ Regexp.new(id) }
         Marley::Post.open(file)
+      end
+    end
+    
+    class << self
+      attr_accessor :default_data_directory
+      
+      def default
+        return nil unless self.default_data_directory
+        @default_repository ||= new(self.default_data_directory)
       end
     end
   end

@@ -4,14 +4,6 @@
       <span class="published_on"><%= post.published_on.strftime("%d %B %Y") %></span><br />
       <span class="title"><a href="<%= permalink(post) %>"><%= post.title %></a></span>
     </h2>
-    <%= post.body_html %>
-  
-    <div class="comments">
-    <% if post.comment_count > 0 %>
-      <a href="<%= permalink(post) %>"><%= post.comment_count %> comment(s) on this post &raquo;</a>
-    <% else %>
-      <a href="<%= permalink(post) %>">Comment on this post &raquo;</a></p>
-    <% end %>
-    </div>
+    <%= post.to_html %>
   </div>
 <% end %>

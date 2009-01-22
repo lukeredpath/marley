@@ -5,91 +5,12 @@
       <span class="published_on"><%= @post.published_on.strftime("%d %B %Y") %></span><br />
       <span class="title"><%= @post.title %></span>
     </h2>
-
-    <%= @post.body_html %>
+    <%= @post.to_html %>
   </div>
   
   <div id="comments">
     
-    <h2>Comments on this entry</h2>
+    <!-- <h2>Comments on this entry</h2> -->
 
-    <% if @post.comment_count > 0 %>
-      <% @post.comments.each_with_index do |comment, index| %>
-      <% if params[:thank_you] && comment == @post.comments.last %>
-        <div id="comment_added_thanks">Thank you for your comment!</div>
-      <% end %>
-    
-      <div class="comment<%= ' spam' if comment.spam? %>" id="comment_<%= comment.id %>">
-        <div class="number"><span class="nodisplay"># </span><%= index.succ %></div>
-        <h3>
-          <%= comment.url.blank? ? h(comment.author) : "<a href=\"#{h(comment.url)}\">#{h(comment.author)}</a>" %>
-          wrote on <%= comment.created_at.strftime("%d %B %Y") %>
-        </h3>
-      
-        <div class="message">
-          <%= markup h(comment.body) %>
-        </div>
-      </div>
-      <% end %>
-    <% else %>
-      <p>There are no comments on this entry.</p>
-    <% end %>
-    
-    <h2 id="add_comment">Add Comment</h2>
-
-    <div id="comment_form">
-      <form action="<%= relative_path("/#{@post.id}/comments#add_comment") %>" method="post" accept-charset="utf-8">
-
-        <div class="field">
-          <label class="required">Your name</label>
-          <input type="text" class="text" name="author" value="" id="author" />
-          <span>required</span>
-        </div>
-        
-        <% if  @comment and @comment.errors.on(:author) %>
-          <div class="error">Author <%= [@comment.errors.on(:author)].flatten.first %></div>
-        <% end %>
-        
-        <div class="field">
-          <label class="required">Your email</label>
-          <input type="text" class="text" name="email" value="" id="email" />
-          <span>required, won't be displayed</span>
-        </div>
-        
-        <% if  @comment and @comment.errors.on(:email) %>
-          <div class="error">E-Mail <%= [@comment.errors.on(:email)].flatten.first %></div>
-        <% end %>
-
-        <div class="field">
-          <label>Your website</label>
-          <input type="text" class="text" name="url" value="" id="url" />
-        </div>
-
-      <% if Marley::Comment.human_verification_question %>
-        <div class="field">
-          <label><%= Marley::Comment.human_verification_question %></label>
-          <input type="text" class="text" name="human_verification_answer" value="" id="url" />
-          <span>Anti-spam verification question</span>
-        </div>
-        
-        <% if  @comment and @comment.errors.on(:human_verification_answer) %>
-          <div class="error">Answer <%= [@comment.errors.on(:human_verification_answer)].flatten.first %></div>
-        <% end %>
-      <% end %>
-
-        <div class="field">
-          <label>Message</label>
-          <span class="hint">Markdown syntax allowed</span>
-          <textarea name="body" rows="8" cols="40"></textarea>
-        </div>
-        
-        <% if @comment and @comment.errors.on(:body) %>
-          <div class="error">Message <%= [@comment.errors.on(:body)].flatten.first %></div>
-        <% end %>
-
-        <input class="submit" type="submit" value="Submit Comment" accesskey="s" />
-      </form>
-
-    </div><!-- /comment_form -->
   </div><!-- /comments -->
 </div><!-- /article -->

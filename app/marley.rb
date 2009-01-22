@@ -30,7 +30,7 @@ include Marley::Configuration
 configure do
   $logger.level = Logger::DEBUG
   set_options :views => marley_theme_directory
-  Marley::Post.data_directory = marley_config.data_directory
+  Marley::Repository.default_data_directory = marley_config.data_directory
   $logger.info("Using log directory #{File.expand_path(marley_config.data_directory)}")
 end
 
@@ -92,14 +92,14 @@ end
 
 ["/", ""].each do |root|
   get root do
-    @posts = Marley::Post.published
+    @posts = Marley::Repository.default.all.sort
     @page_title = marley_config.blog.title
     erb :index
   end
 end
 
 get '/feed' do
-  @posts = Marley::Post.published
+  @posts = Marley::Repository.default.all
   last_modified( @posts.first.updated_on )           # Conditinal GET, send 304 if not modified
   builder :index
 end
@@ -111,14 +111,14 @@ get '/feed/comments' do
 end
 
 get '/:post_id.html' do
-  @post = Marley::Post[ params[:post_id] ]
+  @post = Marley::Repository.default.find(params[:post_id])
   throw :halt, [404, not_found ] unless @post
   @page_title = "#{@post.title} #{marley_config.blog.name}"
   erb :post 
 end
 
 post '/:post_id/comments' do
-  @post = Marley::Post[ params[:post_id] ]
+  @post = Marley::Repository.default.find(params[:post_id])
   throw :halt, [404, not_found ] unless @post
   params.merge!( {
       :ip         => request.env['REMOTE_ADDR'].to_s,
@@ -140,7 +140,7 @@ get '/:post_id/comments' do
 end
 
 get '/:post_id/feed' do
-  @post = Marley::Post[ params[:post_id] ]
+  @post = Marley::Repository.default.find(params[:post_id])
   throw :halt, [404, not_found ] unless @post
   last_modified( @post.comments.last.created_at ) if @post.comments.last # Conditinal GET, send 304 if not modified
   builder :post

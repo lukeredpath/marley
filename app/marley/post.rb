@@ -41,6 +41,7 @@ module Marley
     end
     
     def published_on
+      return Date.parse('01/01/1900') unless @metadata[:published_on]
       DateTime.parse(@metadata[:published_on])
     end
     
