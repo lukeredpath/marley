@@ -70,6 +70,10 @@ module Marley
     def <=>(other_post)
       other_post.published_on <=> published_on
     end
+    
+    def month_and_year
+      [published_on.month, published_on.year]
+    end
             
     private
     

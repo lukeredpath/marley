@@ -1,0 +1,9 @@
+<% @posts.map { |post| post.month_and_year }.uniq.each do |(month, year)| %>
+  <h2><%= Date::MONTHNAMES[month] %> <%= year %></h2>
+  
+  <ul>
+  <% @posts_index[[month, year]].each do |post| %>
+    <li><a href="<%= permalink(post) %>"><%= post.title %></a></li>
+  <% end %>
+  </ul>
+<% end %>

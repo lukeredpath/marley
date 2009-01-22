@@ -19,7 +19,7 @@ $logger = Logger.new(File.join(MARLEY_ROOT, 'log', 'marley.log'))
 
 # FIXME : There must be a clean way to do this :)
 req_or_load = (Sinatra.env == :development) ? :load : :require
-%w{configuration.rb post.rb comment.rb}.each do |f|
+%w{configuration.rb post.rb comment.rb archive.rb}.each do |f|
   send(req_or_load, File.join(File.dirname(__FILE__), 'marley', f) )
 end
 
@@ -96,6 +96,13 @@ end
     @page_title = marley_config.blog.title
     erb :index
   end
+end
+
+get "/archive" do
+  @posts = Marley::Repository.default.all.sort
+  @posts_index = Marley::Archive.new(@posts).posts_indexed_by_month_and_year
+  @page_title = "Archives of #{marley_config.blog.title}"
+  erb :archive
 end
 
 get '/feed' do
