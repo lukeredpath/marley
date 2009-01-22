@@ -1,3 +1,5 @@
+require 'post'
+
 module Marley
   
   class Repository
@@ -5,18 +7,16 @@ module Marley
       @data_directory = data_directory
     end
     
-    def all_articles(options={})
-      options = {:draft => false}.merge(options)
-      Dir[File.join(@data_directory, '*')].map { |directory|
-        next if directory =~ /.draft/ && !options[:draft]
-        Dir[File.join(directory, '*.txt')].first
-      }.compact.sort
+    def all
+      Dir[File.join(@data_directory, '*')].map { |file|
+        Marley::Post.open(file)
+      }
     end
     
-    def article_with_id(id)
-      Dir[File.join(@data_directory, '*')].select { |dir| dir =~ Regexp.new(id) }.map { |directory|
-        Dir[File.join(directory, '*.txt')].first
-      }.compact.first
+    def find(id)
+      if file = Dir[File.join(@data_directory, '*')].find { |dir| dir =~ Regexp.new(id) }
+        Marley::Post.open(file)
+      end
     end
   end
   

@@ -3,10 +3,12 @@ require 'rdiscount'
 require 'redcloth'
 require File.join(File.dirname(__FILE__), 'repository')
 require File.join(File.dirname(__FILE__), 'post_builder')
+require 'digest/md5'
 
 module Marley
 
   class Post
+    include Comparable
     
     def self.parse(id, post_data, format = :plain)
       new(id, post_data.split('---').last.strip, YAML.load(post_data), format)
@@ -56,6 +58,14 @@ module Marley
 
     def permalink
       "/#{id}.html"
+    end
+    
+    def hash
+      Digest::MD5.hexdigest("#{id}#{body[0..20]}")
+    end
+    
+    def ==(other_post)
+      hash == other_post.hash
     end
             
     private
