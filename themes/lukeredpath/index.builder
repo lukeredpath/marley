@@ -13,7 +13,7 @@ xml.feed :'xml:lang' => 'en-US', :xmlns => 'http://www.w3.org/2005/Atom' do
       entry.published rfc_date(post.published_on)
       entry.updated rfc_date(post.updated_on)
       entry.title post.title
-      entry.content post.body_html,  :type => 'html'
+      entry.content post.to_html,  :type => 'html'
       entry.author do |author|
         author.name  marley_config.blog.author || hostname
         author.email(marley_config.blog.email) if marley_config.blog.email

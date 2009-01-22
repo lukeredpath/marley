@@ -99,7 +99,7 @@ end
 end
 
 get '/feed' do
-  @posts = Marley::Repository.default.all
+  @posts = Marley::Repository.default.all.sort
   last_modified( @posts.first.updated_on )           # Conditinal GET, send 304 if not modified
   builder :index
 end
