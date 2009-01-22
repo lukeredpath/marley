@@ -1,7 +1,8 @@
 <% @posts.each do |post| %>
   <div class="post" id="<%= post.id %>">
     <h2>
-      <span class="published_on"><%= post.published_on.strftime("%d %B %Y") %></span><br />
+      <div class="published_on"><%= post.published_on.strftime("%d %B %Y") %>
+        <span class="updated_on">updated <%= post.updated_on.strftime("%d %B %Y") %></div>
       <span class="title"><a href="<%= permalink(post) %>"><%= post.title %></a></span>
     </h2>
     <%= post.to_html %>

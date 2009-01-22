@@ -2,7 +2,8 @@
 
   <div class="post">
     <h2>
-      <span class="published_on"><%= @post.published_on.strftime("%d %B %Y") %></span><br />
+      <div class="published_on"><%= @post.published_on.strftime("%d %B %Y") %>
+        <span class="updated_on">updated <%= @post.updated_on.strftime("%d %B %Y") %></div>
       <span class="title"><%= @post.title %></span>
     </h2>
     <%= @post.to_html %>
