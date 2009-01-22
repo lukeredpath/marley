@@ -90,7 +90,8 @@ This is a _markdown_ post.
   
   context "A post, read from a file" do
     setup do
-      @post = Marley::Post.open(File.join(File.dirname(__FILE__), *%w[fixtures example_post.textile]))
+      @file = File.join(File.dirname(__FILE__), *%w[fixtures example_post.textile])
+      @post = Marley::Post.open(@file)
     end
 
     should "parse the contents of the file" do
@@ -104,6 +105,10 @@ This is a _markdown_ post.
     
     should "use the file name as the post id" do
       assert_equal 'example_post', @post.id
+    end
+    
+    should "use the file modified time as the updated_on timestamp" do
+      assert_equal File.mtime(@file), @post.updated_on
     end
   end
   

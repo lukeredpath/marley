@@ -22,12 +22,13 @@ module Marley
         file_name = File.basename(path_to_file, extension).gsub(/^[0-9]+\-/, '')
         file_name.gsub!(/_/, '-') if options[:convert_underscores]
         post = self.parse(file_name, io.read, extension[1..-1].to_sym)
+        post.updated_on = File.mtime(path_to_file)
       end
       return post
     end
     
     attr_reader :metadata, :body, :id
-    attr_accessor :format
+    attr_accessor :format, :updated_on
     
     def initialize(id, body, metadata = {}, format = :plain)
       @id = id
