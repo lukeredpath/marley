@@ -1,6 +1,8 @@
 module Marley
   
   class Repository
+    attr_reader :data_directory
+    
     def initialize(data_directory)
       @data_directory = data_directory
     end
