@@ -49,6 +49,10 @@ helpers do
   
   include Rack::Utils
   alias_method :h, :escape_html
+  
+  def local?
+    hostname =~ /.local|localhost/
+  end
 
   def markup(string)
     RDiscount::new(string).to_html
