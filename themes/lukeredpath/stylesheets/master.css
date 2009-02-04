@@ -109,6 +109,12 @@ li {
 	padding-left: 0;
 }
 
+li > strong {
+	font-size: 140%;
+	font-weight: normal;
+	letter-spacing: -1px;
+}
+
 pre {
 	background: #eee;
 	padding: 10px;
