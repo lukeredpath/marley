@@ -100,11 +100,13 @@ p {
 
 ul, ol {
 	margin-bottom: 20px;
+	padding-left: 0;
 }
 
 li {
 	margin-bottom: 5px;
-	list-style-type: square;
+	list-style-position: outside;
+	padding-left: 0;
 }
 
 pre {
