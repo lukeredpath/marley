@@ -148,6 +148,14 @@ a img {
 	border: none;
 }
 
+.notice {
+  font-size: 18px;
+  background: #FFEF9C;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  color: #590300;
+}
+
 /** sidebar **/
 
 #sidebar {
