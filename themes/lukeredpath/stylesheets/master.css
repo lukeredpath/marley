@@ -104,9 +104,10 @@ ul, ol {
 }
 
 li {
-	margin-bottom: 5px;
+	margin-bottom: 15px;
 	list-style-position: outside;
 	padding-left: 0;
+	line-height: 1.2;
 }
 
 li > strong {
@@ -200,6 +201,7 @@ div.post {
 
 div.comments {
 	text-align: right;
+	clear: both;
 }
 
 /** disqus comments **/
