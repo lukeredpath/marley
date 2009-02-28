@@ -1,11 +1,11 @@
 xml.instruct!  
 xml.urlset "xmlns" => "http://www.sitemaps.org/schemas/sitemap/0.9" do  
   xml.url do
-    xml.loc relative_path("/")
+    xml.loc absolute_url("/")
     xml.lastmod @posts.first.published_on.xmlschema
   end
   xml.url do
-    xml.loc relative_path("/archive")
+    xml.loc absolute_url("/archive")
     xml.lastmod @posts.first.published_on.xmlschema
   end
   @posts.each do |post|

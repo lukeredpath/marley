@@ -86,7 +86,7 @@ helpers do
   end
   
   def permalink(post)
-    relative_path("/#{post.id}.html")
+    absolute_url("/#{post.id}.html")
   end
   
   def config
