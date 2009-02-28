@@ -148,4 +148,9 @@ get '/about' do
   "<p style=\"font-family:sans-serif\">I'm running on Sinatra version " + Sinatra::VERSION + '</p>'
 end
 
+get "/sitemap.xml" do
+  @posts = Marley::Repository.default.all.sort
+  builder :sitemap
+end
+
 # -----------------------------------------------------------------------------
