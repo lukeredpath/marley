@@ -22,7 +22,7 @@ $logger = Logger.new(File.join(MARLEY_ROOT, 'log', 'marley.log'))
 
 # FIXME : There must be a clean way to do this :)
 req_or_load = (Sinatra.env == :development) ? :load : :require
-%w{configuration.rb post.rb comment.rb archive.rb}.each do |f|
+%w{configuration.rb post.rb archive.rb}.each do |f|
   send(req_or_load, File.join(File.dirname(__FILE__), 'marley', f) )
 end
 
@@ -119,46 +119,11 @@ get '/feed' do
   builder :index
 end
 
-get '/feed/comments' do
-  @comments = Marley::Comment.recent.ham
-  last_modified( @comments.first.created_at )
-  builder :comments
-end
-
 get '/:post_id.html' do
   @post = Marley::Repository.default.find(params[:post_id])
   throw :halt, [404, not_found ] unless @post
   @page_title = "#{@post.title} #{marley_config.blog.name}"
   erb :post 
-end
-
-post '/:post_id/comments' do
-  @post = Marley::Repository.default.find(params[:post_id])
-  throw :halt, [404, not_found ] unless @post
-  params.merge!( {
-      :ip         => request.env['REMOTE_ADDR'].to_s,
-      :user_agent => request.env['HTTP_USER_AGENT'].to_s,
-      :referrer   => request.env['REFERER'].to_s,
-      :permalink  => "#{hostname}#{@post.permalink}"
-  } )
-  # puts params.inspect
-  @comment = Marley::Comment.create( params )
-  if @comment.valid?
-    redirect relative_path("/"+params[:post_id].to_s+'.html?thank_you=#comment_form')
-  else
-    @page_title = "#{@post.title} #{marley_config.blog.name}"
-    erb :post
-  end
-end
-get '/:post_id/comments' do 
-  redirect relative_path("/"+params[:post_id].to_s+'.html#comments')
-end
-
-get '/:post_id/feed' do
-  @post = Marley::Repository.default.find(params[:post_id])
-  throw :halt, [404, not_found ] unless @post
-  last_modified( @post.comments.last.created_at ) if @post.comments.last # Conditinal GET, send 304 if not modified
-  builder :post
 end
 
 get '/theme/stylesheets/:stylesheet.css' do
