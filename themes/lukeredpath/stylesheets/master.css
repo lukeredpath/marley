@@ -116,6 +116,12 @@ li > strong {
   letter-spacing: -1px;
 }
 
+p code {
+  font-family: "Consolas", Monaco, "Courier New", monospace;
+  font-size: 14px;
+  color: #DD1144;
+}
+
 #article .gist {
   margin: 0 0 20px;
 }
