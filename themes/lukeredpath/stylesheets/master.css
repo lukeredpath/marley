@@ -116,11 +116,14 @@ li > strong {
 	letter-spacing: -1px;
 }
 
-pre {
-	background: #eee;
-	padding: 10px;
-	font-family: Monaco, "Courier New", monospace;
-	overflow: auto;
+#article .gist {
+  margin: 0 0 20px;
+}
+
+#article .gist .gist-file,
+#article .gist .gist-file * {
+	font-family: "Consolas", Monaco, "Courier New", monospace;
+  font-size: 12px;
 }
 
 blockquote p {
