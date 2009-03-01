@@ -1,119 +1,119 @@
 body {
-	margin: 0; 
-	padding: 0 330px 50px 50px;
+  margin: 0; 
+  padding: 0 330px 50px 50px;
 }
 
 .nodisplay {
-	display: none;
+  display: none;
 }
 
 /** typography **/
 
 h1 {
-	font-family: "Minion Pro", "Times New Roman", serif;
-	font-size: 42px;
-	font-weight: normal;
-	letter-spacing: -1px;
-	margin: 0 0 30px; padding: 30px 0 0;
-	border-top: 10px solid #FF0099;
+  font-family: "Minion Pro", "Times New Roman", serif;
+  font-size: 42px;
+  font-weight: normal;
+  letter-spacing: -1px;
+  margin: 0 0 30px; padding: 30px 0 0;
+  border-top: 10px solid #FF0099;
 }
 
 h1 a {
-	text-decoration: none;
-	color: #000;
+  text-decoration: none;
+  color: #000;
 }
 
 h1 a:visited {
-	color: #000;
+  color: #000;
 }
 
 h2 {
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 25px;
-	font-weight: normal;
-	letter-spacing: -1px;
-	padding: 0 0 0 10px;
-	line-height: 11px;
-	border-left: 50px solid #FF0099;
-	position: relative;
-	margin: 30px 0 20px;
-	left: -60px;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 25px;
+  font-weight: normal;
+  letter-spacing: -1px;
+  padding: 0 0 0 10px;
+  line-height: 11px;
+  border-left: 50px solid #FF0099;
+  position: relative;
+  margin: 30px 0 20px;
+  left: -60px;
 }
 
 h2 br {
-	display: none;
+  display: none;
 }
 
 h2 .title {
-	line-height: 1;
-	display: block;
+  line-height: 1;
+  display: block;
 }
 
 h2 a:link {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 h2 a:visited {
-	color: #0486DD;
-	text-decoration: none;
+  color: #0486DD;
+  text-decoration: none;
 }
 
 h2 a:hover {
-	text-decoration: underline;
-	color: #FF0099;
+  text-decoration: underline;
+  color: #FF0099;
 }
 
 h2 span {
-	display: block;
-	padding: 0;
-	margin: 0;
+  display: block;
+  padding: 0;
+  margin: 0;
 }
 
 h2 .published_on {
-	color: #FF0099;
-	font-size: 70%;
-	text-transform: uppercase;
-	display: block;
-	margin: 0 0 5px; padding: 0;
+  color: #FF0099;
+  font-size: 70%;
+  text-transform: uppercase;
+  display: block;
+  margin: 0 0 5px; padding: 0;
 }
 
 h2 .updated_on {
-	display: inline;
-	color: #ccc;
+  display: inline;
+  color: #ccc;
 }
 
 h3 {
-	font-family: Helvetica, Arial, sans-serif;
-	font-size: 16px;
-	margin: 0 0 5px; padding: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  margin: 0 0 5px; padding: 0;
 }
 
 p, ul, ol {
-	font-size: 18px;
+  font-size: 18px;
 }
 
 p {
-	line-height: 1.2;
-	color: #222;
-	margin: 5px 0 20px 0;
+  line-height: 1.2;
+  color: #222;
+  margin: 5px 0 20px 0;
 }
 
 ul, ol {
-	margin-bottom: 20px;
-	padding-left: 0;
+  margin-bottom: 20px;
+  padding-left: 0;
 }
 
 li {
-	margin-bottom: 15px;
-	list-style-position: outside;
-	padding-left: 0;
-	line-height: 1.2;
+  margin-bottom: 15px;
+  list-style-position: outside;
+  padding-left: 0;
+  line-height: 1.2;
 }
 
 li > strong {
-	font-size: 140%;
-	font-weight: normal;
-	letter-spacing: -1px;
+  font-size: 140%;
+  font-weight: normal;
+  letter-spacing: -1px;
 }
 
 #article .gist {
@@ -122,34 +122,34 @@ li > strong {
 
 #article .gist .gist-file,
 #article .gist .gist-file * {
-	font-family: "Consolas", Monaco, "Courier New", monospace;
+  font-family: "Consolas", Monaco, "Courier New", monospace;
   font-size: 12px;
 }
 
 blockquote p {
-	color: #555;
-	font-style: italic;
+  color: #555;
+  font-style: italic;
 }
 
 blockquote cite {
-	font-size: 80%;
+  font-size: 80%;
 }
 
 a:link {
-	color: #0486DD;
+  color: #0486DD;
 }
 
 a:visited {
-	color: #666;
+  color: #666;
 }
 
 a:hover {
-	text-decoration: underline;
-	color: #FF0099;
+  text-decoration: underline;
+  color: #FF0099;
 }
 
 a img {
-	border: none;
+  border: none;
 }
 
 .notice {
@@ -163,178 +163,178 @@ a img {
 /** sidebar **/
 
 #sidebar {
-	position: absolute;
-	width: 260px;
-	top: 0; right: 30px;
-	margin: 0 0 30px; padding: 40px 0 0;
-	border-top: 10px solid #333;
+  position: absolute;
+  width: 260px;
+  top: 0; right: 30px;
+  margin: 0 0 30px; padding: 40px 0 0;
+  border-top: 10px solid #333;
 }
 
 #sidebar h3 {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 #sidebar p {
-	font-size: 15px;
-	color: #666;
-	margin-bottom: 10px;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 10px;
 }
 
 #sidebar ul {
-	margin: 0 0 10px;
-	padding: 0px;
+  margin: 0 0 10px;
+  padding: 0px;
 }
 
 #sidebar li {
-	font-size: 15px;
-	list-style-type: none;
+  font-size: 15px;
+  list-style-type: none;
 }
 
 #sidebar div.section {
-	padding-bottom: 10px;
-	margin-bottom: 15px;
-	border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
 }
 
 /** posts **/
 
 div.post {
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 div.comments {
-	text-align: right;
-	clear: both;
+  text-align: right;
+  clear: both;
 }
 
 /** disqus comments **/
 
 #dsq-content #dsq-comments .dsq-comment {
-	background: #eee;
-	padding: 15px 50px;
-	margin: 0 0 20px;
-	font-size: 18px;
+  background: #eee;
+  padding: 15px 50px;
+  margin: 0 0 20px;
+  font-size: 18px;
 }
 
 body #dsq-content #dsq-comments .dsq-comment-header {
-	font-size: 13px;
-	font-family: Helvetica, Arial, sans-serif;
-	text-transform: uppercase;
-	background-color: #ccc;
-	padding: 0;
+  font-size: 13px;
+  font-family: Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  background-color: #ccc;
+  padding: 0;
 }
 
 body #dsq-content #dsq-comments .dsq-comment-body {
-	padding: 5px;
+  padding: 5px;
 }
 
 body #dsq-content #dsq-comments .dsq-comment-footer {
-	padding: 5px;
+  padding: 5px;
 }
 
 /** comments **/
 
 div.comment {
-	background: #eee;
-	padding: 15px 50px;
-	margin: 0 0 20px;
-	position: relative;
-	font-size: 18px;
+  background: #eee;
+  padding: 15px 50px;
+  margin: 0 0 20px;
+  position: relative;
+  font-size: 18px;
 }
 
 div.comment .number {
-	position: absolute;
-	top: 0; left: 0;
-	background: #ccc;
-	display: block;
-	padding: 10px 0;
-	width: 36px;
-	text-align: center;
-	color: #444;
-	font-size: 28px;
+  position: absolute;
+  top: 0; left: 0;
+  background: #ccc;
+  display: block;
+  padding: 10px 0;
+  width: 36px;
+  text-align: center;
+  color: #444;
+  font-size: 28px;
 }
 
 div.comment h3 {
-	font-size: 13px;
-	text-transform: uppercase;
+  font-size: 13px;
+  text-transform: uppercase;
 }
 
 #comment_added_thanks {
-	background: #FFE992;
-	padding: 10px 20px;
-	margin: 0 0 20px;
+  background: #FFE992;
+  padding: 10px 20px;
+  margin: 0 0 20px;
 }
 
 #comment_form {
-	padding: 10px;
+  padding: 10px;
 }
 
 #comment_form .field {
-	clear: both;
-	margin: 0 0 15px;
+  clear: both;
+  margin: 0 0 15px;
 }
 
 #comment_form .field span,
 #comment_form .error {
-	font-size: 11px;
-	text-transform: uppercase;
-	font-family: Helvetica, Arial, sans-serif;
-	color: #666;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #666;
 }
 
 #comment_form .field label {
-	display: block;
-	font-size: 12px;
-	text-transform: uppercase;
-	font-family: Helvetica, Arial, sans-serif;
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 #comment_form .field input {
-	font-size: 13px;
+  font-size: 13px;
 }
 
 #comment_form .field textarea {
-	width: 450px;
+  width: 450px;
 }
 
 #comment_form .field .hint {
-	display: block;
+  display: block;
 }
 
 #comment_form .error {
-	position: relative;
-	top: -6px;
-	margin-bottom: 5px;
-	padding-left: 5px;
-	color: red;
+  position: relative;
+  top: -6px;
+  margin-bottom: 5px;
+  padding-left: 5px;
+  color: red;
 }
 
 /** github badge **/
 
 body #github-badge {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 body #github-badge .repos li {
-	font-size: 12px;
+  font-size: 12px;
 }
 
 /** about me **/
 
 #sidebar #about {
-	margin-bottom: 18px;
-	padding-bottom: 30px;
+  margin-bottom: 18px;
+  padding-bottom: 30px;
 }
 
 #avatar {
-	float: right;
-	margin-top: -60px;
-	height: 160px;
+  float: right;
+  margin-top: -60px;
+  height: 160px;
 }
 
 /** twitter **/
 
 #sidebar ul.tweet_list {
-	color: #666;
-	line-height: 1.2;
+  color: #666;
+  line-height: 1.2;
 }
