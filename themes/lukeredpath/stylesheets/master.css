@@ -202,6 +202,10 @@ a img {
   border-bottom: 1px solid #ddd;
 }
 
+#sidebar div.badge {
+  text-align: center;
+}
+
 /** posts **/
 
 div.post {
